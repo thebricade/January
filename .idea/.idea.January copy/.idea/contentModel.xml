@@ -953,8 +953,16 @@
           </e>
         </e>
         <e p="Script" t="Include">
+          <e p="AudioManager.cs" t="Include" />
+          <e p="DailyMessage.cs" t="Include" />
+          <e p="DeckOfCards.cs" t="Include" />
+          <e p="DialogManager.cs" t="Include" />
+          <e p="Game.cs" t="Include" />
+          <e p="GameState.cs" t="Include" />
           <e p="Mood.cs" t="Include" />
           <e p="MoodImproved.cs" t="Include" />
+          <e p="ServiceLocator.cs" t="Include" />
+          <e p="Shufflebag.cs" t="Include" />
         </e>
       </e>
       <e p="January copy.sln" t="IncludeFlat" />
