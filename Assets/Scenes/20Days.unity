@@ -1537,6 +1537,7 @@ GameObject:
   - component: {fileID: 726264877}
   - component: {fileID: 726264879}
   - component: {fileID: 726264878}
+  - component: {fileID: 726264880}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1606,6 +1607,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffdae87346127745b7a346d7b4dbcf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &726264880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726264874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bef0224968fcab4c9c80f09d60c51ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeset: 0
+  startingConversation: {fileID: 0}
 --- !u!1 &781750664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,7 +1853,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1522868696}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeDayTesting
         m_Mode: 1
         m_Arguments:
@@ -2334,8 +2349,6 @@ GameObject:
   - component: {fileID: 1522868694}
   - component: {fileID: 1522868693}
   - component: {fileID: 1522868692}
-  - component: {fileID: 1522868696}
-  - component: {fileID: 1522868697}
   m_Layer: 0
   m_Name: girlfriend
   m_TagString: Untagged
@@ -2416,33 +2429,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1522868696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522868691}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4483849080af3e24abfd39b92cbea882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeFinished: 1
---- !u!114 &1522868697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522868691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bef0224968fcab4c9c80f09d60c51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeset: 0
-  startingConversation: {fileID: 0}
 --- !u!1 &1621419985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3442,30 +3428,21 @@ GameObject:
   - component: {fileID: 2090196796}
   - component: {fileID: 2090196795}
   - component: {fileID: 2090196806}
-  - component: {fileID: 2090196805}
   - component: {fileID: 2090196804}
   - component: {fileID: 2090196803}
   - component: {fileID: 2090196802}
-  - component: {fileID: 2090196801}
   - component: {fileID: 2090196800}
-  - component: {fileID: 2090196798}
   - component: {fileID: 2090196819}
   - component: {fileID: 2090196818}
-  - component: {fileID: 2090196817}
   - component: {fileID: 2090196816}
-  - component: {fileID: 2090196814}
   - component: {fileID: 2090196813}
   - component: {fileID: 2090196812}
-  - component: {fileID: 2090196811}
   - component: {fileID: 2090196809}
   - component: {fileID: 2090196808}
-  - component: {fileID: 2090196810}
   - component: {fileID: 2090196825}
   - component: {fileID: 2090196823}
-  - component: {fileID: 2090196822}
   - component: {fileID: 2090196839}
   - component: {fileID: 2090196838}
-  - component: {fileID: 2090196837}
   - component: {fileID: 2090196835}
   - component: {fileID: 2090196834}
   - component: {fileID: 2090196832}
@@ -3474,10 +3451,8 @@ GameObject:
   - component: {fileID: 2090196831}
   - component: {fileID: 2090196864}
   - component: {fileID: 2090196863}
-  - component: {fileID: 2090196862}
   - component: {fileID: 2090196858}
   - component: {fileID: 2090196857}
-  - component: {fileID: 2090196856}
   - component: {fileID: 2090196855}
   - component: {fileID: 2090196854}
   - component: {fileID: 2090196853}
@@ -3485,9 +3460,7 @@ GameObject:
   - component: {fileID: 2090196851}
   - component: {fileID: 2090196850}
   - component: {fileID: 2090196849}
-  - component: {fileID: 2090196847}
   - component: {fileID: 2090196846}
-  - component: {fileID: 2090196844}
   - component: {fileID: 2090196843}
   - component: {fileID: 2090196842}
   - component: {fileID: 2090196841}
@@ -3496,10 +3469,8 @@ GameObject:
   - component: {fileID: 2090196833}
   - component: {fileID: 2090196897}
   - component: {fileID: 2090196896}
-  - component: {fileID: 2090196895}
   - component: {fileID: 2090196894}
   - component: {fileID: 2090196893}
-  - component: {fileID: 2090196892}
   - component: {fileID: 2090196891}
   - component: {fileID: 2090196890}
   - component: {fileID: 2090196889}
@@ -3507,9 +3478,7 @@ GameObject:
   - component: {fileID: 2090196887}
   - component: {fileID: 2090196886}
   - component: {fileID: 2090196885}
-  - component: {fileID: 2090196883}
   - component: {fileID: 2090196882}
-  - component: {fileID: 2090196880}
   - component: {fileID: 2090196879}
   - component: {fileID: 2090196877}
   - component: {fileID: 2090196876}
@@ -3517,10 +3486,8 @@ GameObject:
   - component: {fileID: 2090196874}
   - component: {fileID: 2090196873}
   - component: {fileID: 2090196872}
-  - component: {fileID: 2090196871}
   - component: {fileID: 2090196870}
   - component: {fileID: 2090196869}
-  - component: {fileID: 2090196868}
   - component: {fileID: 2090196867}
   - component: {fileID: 2090196866}
   - component: {fileID: 2090196865}
@@ -3529,10 +3496,8 @@ GameObject:
   - component: {fileID: 2090196824}
   - component: {fileID: 2090196908}
   - component: {fileID: 2090196907}
-  - component: {fileID: 2090196906}
   - component: {fileID: 2090196905}
   - component: {fileID: 2090196904}
-  - component: {fileID: 2090196903}
   - component: {fileID: 2090196902}
   - component: {fileID: 2090196901}
   - component: {fileID: 2090196900}
@@ -3642,16 +3607,6 @@ GameObject:
   - component: {fileID: 2090197077}
   - component: {fileID: 2090197076}
   - component: {fileID: 2090197075}
-  - component: {fileID: 2090196915}
-  - component: {fileID: 2090196914}
-  - component: {fileID: 2090196913}
-  - component: {fileID: 2090196912}
-  - component: {fileID: 2090196911}
-  - component: {fileID: 2090196910}
-  - component: {fileID: 2090196909}
-  - component: {fileID: 2090196826}
-  - component: {fileID: 2090196820}
-  - component: {fileID: 2090196807}
   - component: {fileID: 2090196916}
   - component: {fileID: 2090196859}
   - component: {fileID: 2090196861}
@@ -3676,12 +3631,9 @@ GameObject:
   - component: {fileID: 2090196942}
   - component: {fileID: 2090196941}
   - component: {fileID: 2090196940}
-  - component: {fileID: 2090196961}
-  - component: {fileID: 2090196960}
   - component: {fileID: 2090196959}
   - component: {fileID: 2090196958}
   - component: {fileID: 2090196954}
-  - component: {fileID: 2090196953}
   - component: {fileID: 2090196952}
   - component: {fileID: 2090196951}
   - component: {fileID: 2090196950}
@@ -3702,8 +3654,6 @@ GameObject:
   - component: {fileID: 2090196965}
   - component: {fileID: 2090196964}
   - component: {fileID: 2090196963}
-  - component: {fileID: 2090196966}
-  - component: {fileID: 2090196962}
   - component: {fileID: 2090196977}
   - component: {fileID: 2090196976}
   - component: {fileID: 2090196975}
@@ -3730,7 +3680,6 @@ GameObject:
   - component: {fileID: 2090196997}
   - component: {fileID: 2090197091}
   - component: {fileID: 2090197072}
-  - component: {fileID: 2090197073}
   - component: {fileID: 2090197090}
   - component: {fileID: 2090197089}
   - component: {fileID: 2090197088}
@@ -3740,10 +3689,8 @@ GameObject:
   - component: {fileID: 2090197094}
   - component: {fileID: 2090197093}
   - component: {fileID: 2090197092}
-  - component: {fileID: 2090197097}
   - component: {fileID: 2090197098}
   - component: {fileID: 2090197100}
-  - component: {fileID: 2090197099}
   - component: {fileID: 2090197101}
   - component: {fileID: 2090197107}
   - component: {fileID: 2090197106}
@@ -3790,19 +3737,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1247.685, y: 754.661}
+  scrollPos: {x: 1098.2616, y: 354.61713}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 403
-  zoom: 0.46000034
+  zoom: 0.49000034
   scrollViewRect:
     serializedVersion: 2
     x: -343
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 2090196800}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
@@ -3871,20 +3817,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2090196798
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196800}
-  message: Happy0
 --- !u!114 &2090196799
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3929,30 +3861,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: -515.2607
     y: -338.7942
-    width: 120
+    width: 133.6734
     height: 40
   tint: {r: 0.9811321, g: 0.9734159, b: 0.72659314, a: 1}
   useCustomTint: 1
   itemId: 8
-  blockName: Happy-0
+  blockName: HappyMessage1
   description: 
-  eventHandler: {fileID: 2090196798}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196916}
---- !u!114 &2090196801
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196803}
-  message: Panic0
 --- !u!114 &2090196802
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3996,14 +3914,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 274.4317
     y: 152.12518
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 7
-  blockName: Panic-0
+  blockName: PanicMessage1
   description: 
-  eventHandler: {fileID: 2090196801}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196802}
 --- !u!114 &2090196804
@@ -4033,20 +3951,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090196805
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196806}
-  message: Anxious0
 --- !u!114 &2090196806
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4061,63 +3965,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 280.16162
+    x: 227.10046
     y: 61.32321
-    width: 120
+    width: 139.79587
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 1
-  blockName: Anxious-0
+  blockName: AnxiousMessage1
   description: 
-  eventHandler: {fileID: 2090196805}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196804}
---- !u!114 &2090196807
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 337
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196808
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4161,44 +4020,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 270.9569
     y: 532.786
-    width: 120
+    width: 131.6326
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 21
-  blockName: Hyper-0
+  blockName: HyperMessage1
   description: 
-  eventHandler: {fileID: 2090196810}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196808}
---- !u!114 &2090196810
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196809}
-  message: Hyper0
---- !u!114 &2090196811
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196813}
-  message: Mono0
 --- !u!114 &2090196812
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4242,30 +4073,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 266.69092
     y: 459.01926
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 20
-  blockName: Mono-0
+  blockName: MonoMessage1
   description: 
-  eventHandler: {fileID: 2090196811}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196812}
---- !u!114 &2090196814
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196816}
-  message: Sad0
 --- !u!114 &2090196815
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4306,31 +4123,17 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -467.9751
-    y: 351.80667
+    y: 353.9806
     width: 120
     height: 40
   tint: {r: 0.47450984, g: 0.45882356, b: 0.95294124, a: 1}
   useCustomTint: 1
   itemId: 19
-  blockName: Sad
+  blockName: SadMessage1
   description: 
-  eventHandler: {fileID: 2090196814}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196984}
---- !u!114 &2090196817
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196819}
-  message: Angry0
 --- !u!114 &2090196818
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4374,61 +4177,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 275.47757
     y: 298.6653
-    width: 120
+    width: 129.59178
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 18
-  blockName: Angry-0
+  blockName: AngryMessage1
   description: 
-  eventHandler: {fileID: 2090196817}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196818}
---- !u!114 &2090196820
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 336
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196821
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4443,20 +4201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 2090196899}
   message: Hyper4
---- !u!114 &2090196822
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196825}
-  message: Anxious1
 --- !u!114 &2090196823
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4512,63 +4256,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 407.8885
-    y: 71.05332
-    width: 120
+    x: 387.48038
+    y: 30.237024
+    width: 139.79587
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 48
-  blockName: Anxious-1
+  blockName: AnxiousMessage2
   description: 
-  eventHandler: {fileID: 2090196822}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196823}
---- !u!114 &2090196826
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 335
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196827
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4637,14 +4336,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 807.4788
+    x: 934.00934
     y: 63.259903
-    width: 120
+    width: 139.79587
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 58
-  blockName: Anxious-4
+  blockName: AnxiousMessage5
   description: 
   eventHandler: {fileID: 2090196831}
   commandList:
@@ -4665,12 +4364,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 784.6301
     y: 454.33542
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 129
-  blockName: Mono-4
+  blockName: MonoMessage5
   description: 
   eventHandler: {fileID: 2090196824}
   commandList:
@@ -4758,14 +4457,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 666.38727
-    y: 72.39381
-    width: 120
+    x: 729.65265
+    y: 39.74077
+    width: 139.79587
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 57
-  blockName: Anxious-3
+  blockName: AnxiousMessage4
   description: 
   eventHandler: {fileID: 2090196832}
   commandList:
@@ -4797,20 +4496,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090196837
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196839}
-  message: Anxious2
 --- !u!114 &2090196838
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4852,16 +4537,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 534.4348
-    y: 72.39381
-    width: 120
+    x: 554.8431
+    y: 17.291801
+    width: 139.79587
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 52
-  blockName: Anxious-2
+  blockName: AnxiousMessage3
   description: 
-  eventHandler: {fileID: 2090196837}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196838}
 --- !u!114 &2090196840
@@ -4880,12 +4565,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: -962.7909
     y: 163.62692
-    width: 120
+    width: 133.6734
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
   itemId: 117
-  blockName: Happy-4
+  blockName: HappyMessage5
   description: 
   eventHandler: {fileID: 2090196833}
   commandList:
@@ -4945,32 +4630,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -932.4951
-    y: 54.70788
-    width: 120
+    x: -1001.8829
+    y: 40.42218
+    width: 133.6734
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
   itemId: 116
-  blockName: Happy-3
+  blockName: HappyMessage4
   description: 
   eventHandler: {fileID: 2090196841}
   commandList:
   - {fileID: 2090196842}
---- !u!114 &2090196844
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196846}
-  message: Happy2
 --- !u!114 &2090196845
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4987,7 +4658,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -148.23994
     y: -31.393127
-    width: 141.30429
+    width: 135.71423
     height: 40
   tint: {r: 0.09616028, g: 0.9056604, b: 0, a: 1}
   useCustomTint: 1
@@ -5012,30 +4683,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: -544.684
     y: -81.65911
-    width: 120
+    width: 133.6734
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
   itemId: 115
-  blockName: Happy-2
+  blockName: HappyMessage3
   description: 
-  eventHandler: {fileID: 2090196844}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196976}
---- !u!114 &2090196847
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196849}
-  message: Happy1
 --- !u!114 &2090196848
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5079,14 +4736,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: -521.8151
     y: -195.92075
-    width: 120
+    width: 133.6734
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
   itemId: 114
-  blockName: Happy-1
+  blockName: HappyMessage2
   description: 
-  eventHandler: {fileID: 2090196847}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196952}
 --- !u!114 &2090196850
@@ -5146,12 +4803,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 791.86646
     y: 145.87878
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 113
-  blockName: Panic-4
+  blockName: PanicMessage5
   description: 
   eventHandler: {fileID: 2090196850}
   commandList:
@@ -5213,30 +4870,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 661.899
     y: 148.87878
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 112
-  blockName: Panic-3
+  blockName: PanicMessage4
   description: 
   eventHandler: {fileID: 2090196853}
   commandList:
   - {fileID: 2090196854}
---- !u!114 &2090196856
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196858}
-  message: Panic2
 --- !u!114 &2090196857
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5280,14 +4923,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 535.899
     y: 147.87878
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 111
-  blockName: Panic-2
+  blockName: PanicMessage3
   description: 
-  eventHandler: {fileID: 2090196856}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196857}
 --- !u!114 &2090196859
@@ -5306,7 +4949,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -383.2111
     y: -339.24258
-    width: 143.4782
+    width: 137.75504
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -5374,20 +5017,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090196862
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196864}
-  message: Panic1
 --- !u!114 &2090196863
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5431,14 +5060,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 406.899
     y: 149.87878
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 109
-  blockName: Panic-1
+  blockName: PanicMessage2
   description: 
-  eventHandler: {fileID: 2090196862}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196863}
 --- !u!114 &2090196865
@@ -5498,30 +5127,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 658.0727
     y: 454.33542
-    width: 120
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 128
-  blockName: Mono-3
+  blockName: MonoMessage4
   description: 
   eventHandler: {fileID: 2090196865}
   commandList:
   - {fileID: 2090196866}
---- !u!114 &2090196868
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196870}
-  message: Mono2
 --- !u!114 &2090196869
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5563,32 +5178,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 532.37695
-    y: 456.67734
-    width: 120
+    x: 540.5402
+    y: 454.63654
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 127
-  blockName: Mono-2
+  blockName: MonoMessage3
   description: 
-  eventHandler: {fileID: 2090196868}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196869}
---- !u!114 &2090196871
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196873}
-  message: Mono1
 --- !u!114 &2090196872
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5630,16 +5231,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 395.28088
-    y: 459.01926
-    width: 120
+    x: 393.24008
+    y: 456.97845
+    width: 127.550964
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 126
-  blockName: Mono-1
+  blockName: MonoMessage2
   description: 
-  eventHandler: {fileID: 2090196871}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196872}
 --- !u!114 &2090196874
@@ -5704,7 +5305,7 @@ MonoBehaviour:
   tint: {r: 0.45882353, g: 0.9529412, b: 0.47250032, a: 1}
   useCustomTint: 1
   itemId: 125
-  blockName: Sad-4
+  blockName: SadMessage5
   description: 
   eventHandler: {fileID: 2090196874}
   commandList:
@@ -5753,7 +5354,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -167.05273
     y: 719.7357
-    width: 121.739075
+    width: 120
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -5765,7 +5366,6 @@ MonoBehaviour:
   - {fileID: 2090197070}
   - {fileID: 2090197069}
   - {fileID: 2090197068}
-  - {fileID: 2090196826}
 --- !u!114 &2090196879
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5787,25 +5387,11 @@ MonoBehaviour:
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
   itemId: 124
-  blockName: Sad-3
+  blockName: SadMessage4
   description: 
   eventHandler: {fileID: 2090196877}
   commandList:
   - {fileID: 2090197062}
---- !u!114 &2090196880
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196882}
-  message: Sad2
 --- !u!114 &2090196881
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5822,7 +5408,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -178.60352
     y: 575.91956
-    width: 121.739075
+    width: 120
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -5836,7 +5422,6 @@ MonoBehaviour:
   - {fileID: 2090196956}
   - {fileID: 2090196921}
   - {fileID: 2090197043}
-  - {fileID: 2090196910}
 --- !u!114 &2090196882
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5851,32 +5436,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -561.28174
+    x: -555.15924
     y: 547.5697
     width: 120
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
   itemId: 123
-  blockName: Sad-2
+  blockName: SadMessage3
   description: 
-  eventHandler: {fileID: 2090196880}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090197035}
---- !u!114 &2090196883
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196885}
-  message: Sad1
 --- !u!114 &2090196884
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5925,9 +5496,9 @@ MonoBehaviour:
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
   itemId: 122
-  blockName: Sad-1
+  blockName: SadMessage2
   description: 
-  eventHandler: {fileID: 2090196883}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090197023}
 --- !u!114 &2090196886
@@ -5987,12 +5558,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 791.2189
     y: 299.44577
-    width: 120
+    width: 129.59178
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 121
-  blockName: Angry-4
+  blockName: AngryMessage5
   description: 
   eventHandler: {fileID: 2090196886}
   commandList:
@@ -6054,30 +5625,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 662.3196
     y: 301.88995
-    width: 120
+    width: 129.59178
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 120
-  blockName: Angry-3
+  blockName: AngryMessage4
   description: 
   eventHandler: {fileID: 2090196889}
   commandList:
   - {fileID: 2090196890}
---- !u!114 &2090196892
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196894}
-  message: Angry2
 --- !u!114 &2090196893
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6119,32 +5676,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 532.24927
+    x: 530.0754
     y: 301.88995
-    width: 120
+    width: 129.59178
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 119
-  blockName: Angry-2
+  blockName: AngryMessage3
   description: 
-  eventHandler: {fileID: 2090196892}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196893}
---- !u!114 &2090196895
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196897}
-  message: Angry1
 --- !u!114 &2090196896
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6188,14 +5731,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 407.00806
     y: 299.88995
-    width: 120
+    width: 129.59178
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 118
-  blockName: Angry-1
+  blockName: AngryMessage2
   description: 
-  eventHandler: {fileID: 2090196895}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196896}
 --- !u!114 &2090196898
@@ -6241,12 +5784,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 787.9569
     y: 526.786
-    width: 120
+    width: 131.6326
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 133
-  blockName: Hyper-4
+  blockName: HyperMessage5
   description: 
   eventHandler: {fileID: 2090196821}
   commandList:
@@ -6308,30 +5851,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 656.9569
     y: 528.786
-    width: 120
+    width: 131.6326
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 132
-  blockName: Hyper-3
+  blockName: HyperMessage4
   description: 
   eventHandler: {fileID: 2090196900}
   commandList:
   - {fileID: 2090196901}
---- !u!114 &2090196903
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196905}
-  message: Hyper2
 --- !u!114 &2090196904
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6374,31 +5903,17 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 527.9569
-    y: 530.786
-    width: 120
+    y: 532.82684
+    width: 131.6326
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 131
-  blockName: Hyper-2
+  blockName: HyperMessage3
   description: 
-  eventHandler: {fileID: 2090196903}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196904}
---- !u!114 &2090196906
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2090196908}
-  message: Hyper1
 --- !u!114 &2090196907
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6442,331 +5957,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 399.98944
     y: 532.786
-    width: 120
+    width: 131.6326
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 130
-  blockName: Hyper-1
+  blockName: HyperMessage2
   description: 
-  eventHandler: {fileID: 2090196906}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196907}
---- !u!114 &2090196909
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 334
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196910
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 333
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196911
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 332
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196912
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 331
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196913
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 330
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196914
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 329
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196915
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 328
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196916
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6834,7 +6034,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -11.006134
-    y: -327.59018
+    y: -317.38614
     width: 120
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
@@ -6850,7 +6050,6 @@ MonoBehaviour:
   - {fileID: 2090196942}
   - {fileID: 2090196941}
   - {fileID: 2090196940}
-  - {fileID: 2090196960}
 --- !u!114 &2090196919
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7027,9 +6226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -23.429274
+    x: -21.388458
     y: -404.25513
-    width: 149.99992
+    width: 143.87749
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7040,7 +6239,6 @@ MonoBehaviour:
   commandList:
   - {fileID: 2090196924}
   - {fileID: 2090196923}
-  - {fileID: 2090196961}
 --- !u!114 &2090196926
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7132,9 +6330,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -192.84811
-    y: -214.8856
-    width: 126.0869
+    x: -196.92975
+    y: -212.84479
+    width: 121.42852
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7147,7 +6345,6 @@ MonoBehaviour:
   - {fileID: 2090196848}
   - {fileID: 2090196968}
   - {fileID: 2090196967}
-  - {fileID: 2090196966}
 --- !u!114 &2090196930
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7191,7 +6388,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -190.14784
     y: -157.36891
-    width: 152.17383
+    width: 145.9183
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7203,7 +6400,6 @@ MonoBehaviour:
   - {fileID: 2090196965}
   - {fileID: 2090196964}
   - {fileID: 2090196963}
-  - {fileID: 2090196962}
 --- !u!114 &2090196932
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7299,7 +6495,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -190.6424
     y: -291.1404
-    width: 134.78255
+    width: 129.59178
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7311,7 +6507,6 @@ MonoBehaviour:
   - {fileID: 2090196959}
   - {fileID: 2090196958}
   - {fileID: 2090196954}
-  - {fileID: 2090196953}
 --- !u!114 &2090196936
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7328,7 +6523,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -198.83905
     y: -371.4684
-    width: 134.78255
+    width: 129.59178
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7730,7 +6925,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -373.88278
     y: -194.19598
-    width: 147.82602
+    width: 141.83667
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -7773,51 +6968,6 @@ MonoBehaviour:
   hideThisOption:
     booleanRef: {fileID: 0}
     booleanVal: 0
---- !u!114 &2090196953
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 367
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196954
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7980,141 +7130,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090196960
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 363
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196961
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 362
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
---- !u!114 &2090196962
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 389
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196963
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -8196,51 +7211,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090196966
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 388
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090196967
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -8312,7 +7282,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -186.73416
     y: -95.45047
-    width: 126.0869
+    width: 121.42852
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -8527,7 +7497,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -370.33246
     y: -85.3856
-    width: 147.82602
+    width: 141.83667
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -8558,7 +7528,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -10.326344
     y: -114.964264
-    width: 128.2608
+    width: 123.46934
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -8886,7 +7856,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -22.689484
     y: 341.49408
-    width: 154.34775
+    width: 147.9591
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -8898,7 +7868,6 @@ MonoBehaviour:
   - {fileID: 2090197000}
   - {fileID: 2090196999}
   - {fileID: 2090196998}
-  - {fileID: 2090196914}
 --- !u!114 &2090196991
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -8915,7 +7884,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -27.65856
     y: 253.14131
-    width: 154.34775
+    width: 147.9591
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -8927,7 +7896,6 @@ MonoBehaviour:
   - {fileID: 2090197003}
   - {fileID: 2090197002}
   - {fileID: 2090197001}
-  - {fileID: 2090196915}
 --- !u!114 &2090196992
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -9311,7 +8279,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -28.968914
     y: 402.5735
-    width: 123.91299
+    width: 120
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -9325,7 +8293,6 @@ MonoBehaviour:
   - {fileID: 2090197016}
   - {fileID: 2090197015}
   - {fileID: 2090197014}
-  - {fileID: 2090196913}
 --- !u!114 &2090197007
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -9342,7 +8309,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -22.215406
     y: 469.61884
-    width: 128.2608
+    width: 123.46934
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -9355,7 +8322,6 @@ MonoBehaviour:
   - {fileID: 2090197010}
   - {fileID: 2090197009}
   - {fileID: 2090197008}
-  - {fileID: 2090196912}
 --- !u!114 &2090197008
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -9507,7 +8473,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 14.395554
     y: -45.743076
-    width: 139.13037
+    width: 133.6734
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -9518,7 +8484,6 @@ MonoBehaviour:
   commandList:
   - {fileID: 2090197098}
   - {fileID: 2090197100}
-  - {fileID: 2090197099}
 --- !u!114 &2090197014
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -9670,7 +8635,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -318.32574
     y: 345.75522
-    width: 121.739075
+    width: 120
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -9801,7 +8766,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -334.50912
     y: 446.89142
-    width: 132.60864
+    width: 127.550964
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -9830,7 +8795,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -186.60352
     y: 513.91956
-    width: 126.0869
+    width: 121.42852
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -9842,7 +8807,6 @@ MonoBehaviour:
   - {fileID: 2090197042}
   - {fileID: 2090197041}
   - {fileID: 2090197040}
-  - {fileID: 2090196911}
 --- !u!114 &2090197026
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -10071,7 +9035,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -338.16064
     y: 551.053
-    width: 132.60864
+    width: 127.550964
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -10411,7 +9375,6 @@ MonoBehaviour:
   commandList:
   - {fileID: 2090197045}
   - {fileID: 2090197044}
-  - {fileID: 2090196909}
 --- !u!114 &2090197047
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -10613,7 +9576,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -173.1503
     y: 628.27264
-    width: 128.2608
+    width: 123.46934
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -10804,7 +9767,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -356.07712
     y: 672.17487
-    width: 132.60864
+    width: 127.550964
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -10887,7 +9850,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -368.9
     y: 837.20166
-    width: 130.43472
+    width: 125.510155
     height: 40
   tint: {r: 0.4745098, g: 0.45882353, b: 0.9529412, a: 1}
   useCustomTint: 1
@@ -10895,8 +9858,7 @@ MonoBehaviour:
   blockName: Sad-4-TooHard
   description: 
   eventHandler: {fileID: 0}
-  commandList:
-  - {fileID: 2090196807}
+  commandList: []
 --- !u!114 &2090197065
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -10924,7 +9886,6 @@ MonoBehaviour:
   commandList:
   - {fileID: 2090197076}
   - {fileID: 2090197075}
-  - {fileID: 2090196820}
 --- !u!114 &2090197066
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -11103,7 +10064,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 142.94926
     y: -165.64415
-    width: 132.60864
+    width: 127.550964
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -11116,52 +10077,6 @@ MonoBehaviour:
   - {fileID: 2090197089}
   - {fileID: 2090197088}
   - {fileID: 2090197074}
-  - {fileID: 2090197073}
---- !u!114 &2090197073
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 416
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090197074
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -11613,7 +10528,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 151.60194
     y: -108.78387
-    width: 143.4782
+    width: 137.75504
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -11627,7 +10542,6 @@ MonoBehaviour:
   - {fileID: 2090197094}
   - {fileID: 2090197093}
   - {fileID: 2090197092}
-  - {fileID: 2090197097}
 --- !u!114 &2090197092
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -11763,51 +10677,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090197097
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 426
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090197098
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -11835,51 +10704,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2090197099
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090196793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 429
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 1522868691}
-  targetComponentAssemblyName: MoodImproved, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: MoodImproved
-  targetMethod: GetRandomScene
-  targetMethodText: 'GetRandomScene (GameMood): Boolean'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: GameMood, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: GameMood
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Boolean
-  showInherited: 0
-  callMode: 0
 --- !u!114 &2090197100
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -11921,9 +10745,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -810.9054
-    y: 46.39393
-    width: 152.17383
+    x: -833.35443
+    y: -37.279495
+    width: 145.9183
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1
@@ -11979,7 +10803,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -816.86487
     y: 104.79682
-    width: 160.86948
+    width: 154.08156
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12220,9 +11044,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -228.46736
+    x: -226.42654
     y: 87.715775
-    width: 189.13034
+    width: 180.61215
     height: 40
   tint: {r: 0.09960871, g: 1, b: 0.0047169924, a: 1}
   useCustomTint: 1
@@ -12250,7 +11074,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -222.70343
     y: 26.9291
-    width: 152.17383
+    width: 145.9183
     height: 40
   tint: {r: 0.31359115, g: 0.8867924, b: 0.24679601, a: 1}
   useCustomTint: 1
@@ -12381,7 +11205,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -437.4466
     y: 85.327
-    width: 173.91296
+    width: 166.32645
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12562,7 +11386,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -613.051
     y: 35.666874
-    width: 134.78255
+    width: 129.59178
     height: 40
   tint: {r: 0.98039216, g: 0.972549, b: 0.7254902, a: 1}
   useCustomTint: 1

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_January.-2061026931.00" t="ExcludeRecursive" />
-    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\Bri\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Bri\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_January.-1639328859.00" t="ExcludeRecursive" />
+    <e p="D:\Patreon\January" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Fungus" t="Include">
           <e p="Docs" t="Include">
+            <e p="CHANGELOG.txt" t="Include" />
             <e p="LICENSE.txt" t="Include" />
             <e p="readme.txt" t="Include" />
           </e>
@@ -52,6 +52,7 @@
               <e p="FadeSprite.cs" t="Include" />
               <e p="FadeToView.cs" t="Include" />
               <e p="FadeUI.cs" t="Include" />
+              <e p="FromString.cs" t="Include" />
               <e p="Fullscreen.cs" t="Include" />
               <e p="GetText.cs" t="Include" />
               <e p="GetToggleState.cs" t="Include" />
@@ -107,8 +108,10 @@
               <e p="MoveTo.cs" t="Include" />
               <e p="MoveToView.cs" t="Include" />
               <e p="OpenURL.cs" t="Include" />
+              <e p="PlayAmbianceSound.cs" t="Include" />
               <e p="PlayAnimState.cs" t="Include" />
               <e p="PlayMusic.cs" t="Include" />
+              <e p="PlayRandomSound.cs" t="Include" />
               <e p="PlaySound.cs" t="Include" />
               <e p="PlayUsfxrSound.cs" t="Include" />
               <e p="Portrait.cs" t="Include" />
@@ -163,9 +166,11 @@
               <e p="SetSaveProfile.cs" t="Include" />
               <e p="SetSayDialog.cs" t="Include" />
               <e p="SetSliderValue.cs" t="Include" />
+              <e p="SetSprite.cs" t="Include" />
               <e p="SetSpriteOrder.cs" t="Include" />
               <e p="SetText.cs" t="Include" />
               <e p="SetToggleState.cs" t="Include" />
+              <e p="SetUIImage.cs" t="Include" />
               <e p="SetVariable.cs" t="Include" />
               <e p="ShakeCamera.cs" t="Include" />
               <e p="ShakePosition.cs" t="Include" />
@@ -175,12 +180,14 @@
               <e p="SpawnObject.cs" t="Include" />
               <e p="StartSwipe.cs" t="Include" />
               <e p="Stop.cs" t="Include" />
+              <e p="StopAmbiance.cs" t="Include" />
               <e p="StopBlock.cs" t="Include" />
               <e p="StopFlowchart.cs" t="Include" />
               <e p="StopMusic.cs" t="Include" />
               <e p="StopSwipe.cs" t="Include" />
               <e p="StopTween.cs" t="Include" />
               <e p="StopTweens.cs" t="Include" />
+              <e p="ToString.cs" t="Include" />
               <e p="Transform" t="Include">
                 <e p="TransformProperty.cs" t="Include" />
               </e>
@@ -234,6 +241,7 @@
             </e>
             <e p="Editor" t="Include">
               <e p="AssetModProcessor.cs" t="Include" />
+              <e p="BasePopupWindowContent.cs" t="Include" />
               <e p="BlockEditor.cs" t="Include" />
               <e p="BlockInspector.cs" t="Include" />
               <e p="BlockReferenceDrawer.cs" t="Include" />
@@ -264,6 +272,11 @@
               <e p="MenuEditor.cs" t="Include" />
               <e p="MenuTimerEditor.cs" t="Include" />
               <e p="NarrativeMenuItems.cs" t="Include" />
+              <e p="PopupContent" t="Include">
+                <e p="CommandSelectorPopupWindowContent.cs" t="Include" />
+                <e p="EventSelectorPopupWindowContent.cs" t="Include" />
+                <e p="VariableSelectPopupWindowContent.cs" t="Include" />
+              </e>
               <e p="PortraitEditor.cs" t="Include" />
               <e p="SaveDataEditor.cs" t="Include" />
               <e p="SaveMenuEditor.cs" t="Include" />
@@ -278,6 +291,7 @@
               <e p="VariableConditionEditor.cs" t="Include" />
               <e p="VariableEditor.cs" t="Include" />
               <e p="VariableListAdaptor.cs" t="Include" />
+              <e p="VariableReferenceDrawer.cs" t="Include" />
               <e p="ViewEditor.cs" t="Include" />
               <e p="WriteEditor.cs" t="Include" />
               <e p="WriterAudioEditor.cs" t="Include" />
@@ -320,6 +334,7 @@
               <e p="ILocalizable.cs" t="Include" />
               <e p="IUpdateable.cs" t="Include" />
               <e p="IWriterListener.cs" t="Include" />
+              <e p="IWriterTextDestination.cs" t="Include" />
             </e>
             <e p="link.xml" t="Include" />
             <e p="Signals" t="Include">
@@ -341,9 +356,11 @@
               <e p="SaveHistory.cs" t="Include" />
               <e p="SavePointData.cs" t="Include" />
               <e p="StringFormatter.cs" t="Include" />
+              <e p="TextAdapter.cs" t="Include" />
               <e p="TextTagParser.cs" t="Include" />
               <e p="TextTagToken.cs" t="Include" />
               <e p="TextVariationHandler.cs" t="Include" />
+              <e p="VariableReference.cs" t="Include" />
             </e>
             <e p="VariableTypes" t="Include">
               <e p="AnimatorVariable.cs" t="Include" />
@@ -837,6 +854,31 @@
                 <e p="AssemblyInfo.cs" t="Include" />
               </e>
             </e>
+            <e p="TextMeshPro" t="Include">
+              <e p="Resources" t="Include">
+                <e p="LineBreaking Following Characters.txt" t="Include" />
+                <e p="LineBreaking Leading Characters.txt" t="Include" />
+                <e p="Shaders" t="Include">
+                  <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+                  <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+                  <e p="TMP_Bitmap.shader" t="Include" />
+                  <e p="TMP_SDF Overlay.shader" t="Include" />
+                  <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+                  <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+                  <e p="TMP_SDF-Mobile.shader" t="Include" />
+                  <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+                  <e p="TMP_SDF-Surface.shader" t="Include" />
+                  <e p="TMP_SDF.shader" t="Include" />
+                  <e p="TMP_Sprite.shader" t="Include" />
+                  <e p="TMPro.cginc" t="Include" />
+                  <e p="TMPro_Properties.cginc" t="Include" />
+                  <e p="TMPro_Surface.cginc" t="Include" />
+                </e>
+              </e>
+              <e p="Sprites" t="Include">
+                <e p="EmojiOne Attribution.txt" t="Include" />
+              </e>
+            </e>
             <e p="ThirdPartyNotices.txt" t="Include" />
             <e p="Usfxr" t="Include">
               <e p="Editor" t="Include">
@@ -853,6 +895,31 @@
         </e>
         <e p="FungusExamples" t="Include">
           <e p="Attribution.txt" t="Include" />
+          <e p="FirstPerson" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="ForceCursorVisible.cs" t="Include" />
+              <e p="FPDemoPriorityRouter.cs" t="Include" />
+              <e p="LookingAtDoor.cs" t="Include" />
+              <e p="SimpleForceMovement.cs" t="Include" />
+              <e p="SimpleMouseLook.cs" t="Include" />
+            </e>
+            <e p="Visuals" t="Include">
+              <e p="Google Poly" t="Include">
+                <e p="Button" t="Include">
+                  <e p="CC-BY.txt" t="Include" />
+                </e>
+                <e p="Door" t="Include">
+                  <e p="CC-BY.txt" t="Include" />
+                </e>
+                <e p="Key" t="Include">
+                  <e p="CC-BY.txt" t="Include" />
+                </e>
+                <e p="Lock" t="Include">
+                  <e p="CC-BY.txt" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
           <e p="FungusLua" t="Include">
             <e p="Bindings" t="Include">
               <e p="CustomScript.cs" t="Include" />
@@ -886,16 +953,24 @@
           </e>
         </e>
         <e p="Script" t="Include">
+          <e p="AudioManager.cs" t="Include" />
+          <e p="DailyMessage.cs" t="Include" />
+          <e p="DeckOfCards.cs" t="Include" />
+          <e p="DialogManager.cs" t="Include" />
+          <e p="Game.cs" t="Include" />
+          <e p="GameState.cs" t="Include" />
+          <e p="MessageTiming.cs" t="Include" />
           <e p="Mood.cs" t="Include" />
+          <e p="MoodImproved.cs" t="Include" />
+          <e p="SaveLoad.cs" t="Include" />
+          <e p="ServiceLocator.cs" t="Include" />
+          <e p="Shufflebag.cs" t="Include" />
         </e>
       </e>
       <e p="January.sln" t="IncludeFlat" />
-      <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>
 </project>
