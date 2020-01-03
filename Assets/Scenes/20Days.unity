@@ -1538,6 +1538,7 @@ GameObject:
   - component: {fileID: 726264879}
   - component: {fileID: 726264878}
   - component: {fileID: 726264880}
+  - component: {fileID: 726264881}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1621,6 +1622,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeset: 0
   startingConversation: {fileID: 0}
+--- !u!114 &726264881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726264874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25cb613b17b54e47a919e06eeb2ed3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &781750664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3761,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 2090196879}
   selectedCommands: []
   variables: []
   description: 

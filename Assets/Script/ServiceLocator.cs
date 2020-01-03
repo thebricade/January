@@ -9,6 +9,7 @@ public class ServiceLocator
    public static Game _game;
    public static DialogManager _dialogManager;
    public static DailyMessage _dailyMessage;
+   public static MessageTiming _messageTiming;
    public static AudioManager _audioManager;
    public static GameState _gameState;
    public static Flowchart _flowchart; 

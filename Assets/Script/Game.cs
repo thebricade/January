@@ -24,6 +24,8 @@ public class Game : MonoBehaviour
         ServiceLocator._audioManager = gameObject.GetComponent<AudioManager>();
         ServiceLocator._gameState = gameObject.GetComponent<GameState>();
         ServiceLocator._dailyMessage = gameObject.GetComponent<DailyMessage>();
+        ServiceLocator._messageTiming = gameObject.GetComponent<MessageTiming>();
+
 
     }
 

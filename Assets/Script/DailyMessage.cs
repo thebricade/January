@@ -9,13 +9,15 @@ public class DailyMessage : MonoBehaviour
     public bool timeset;
    // public Block nextConversation;
     protected List<DialogManager.Dialog> conversations;
-    public Block startingConversation; 
-    
+    public Block startingConversation;
+
+
     // Start is called before the first frame update
     void Start()
     {
         timeset = true;
         //setFirstConversation();
+        ServiceLocator._messageTiming.SetGoalTime();
         QueueMessage();
     }
     
@@ -27,16 +29,26 @@ public class DailyMessage : MonoBehaviour
 
     public void QueueMessage() // queue everything for the set amount of days to play (5 for starting) 
     {
-        if (timeset) // make this prettier create a toString function in the DialogManager that does this for me? 
-        {
+        if (conversations == null) //if conversations doesn't exist we create a list of the messages with how many days the player can play '
+        { 
             conversations = new List<DialogManager.Dialog>();
-            conversations.Add(ServiceLocator._dialogManager.LoadMessage());
-            //conversations[0].mood
-            Debug.Log(conversations[0].mood.ToString()); 
-            Debug.Log(conversations[0].chatLog.ToString());
-            Debug.Log(conversations[0].mood.ToString()+conversations[0].chatLog.ToString());
-            string nextBlock = (conversations[0].mood.ToString() + conversations[0].chatLog.ToString());
-           ServiceLocator._flowchart.ExecuteBlock(nextBlock);
+           // currentDay = 0; 
+            for (int i = 0; i < ServiceLocator._messageTiming.lengthOfGame; i++)
+            {
+                conversations.Add(ServiceLocator._dialogManager.LoadMessage());
+            }
+        }
+        //conversations[0].mood
+        Debug.Log(conversations[0].mood.ToString()); 
+        Debug.Log(conversations[0].chatLog.ToString());
+        Debug.Log(conversations[0].mood.ToString()+conversations[0].chatLog.ToString());
+       // string nextBlock = (conversations[currentDay].mood.ToString() + conversations[currentDay].chatLog.ToString());
+        Debug.Log("how many conversationgs loaded "+conversations.Count);
+       // ServiceLocator._flowchart.ExecuteBlock(nextBlock);
+        if (ServiceLocator._messageTiming.CheckTimeMet()) // make this prettier create a toString function in the DialogManager that does this for me? 
+        {
+            
+           
 
         }
         else
