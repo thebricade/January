@@ -1620,7 +1620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bef0224968fcab4c9c80f09d60c51ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeset: 0
   startingConversation: {fileID: 0}
 --- !u!114 &726264881
 MonoBehaviour:
@@ -1634,6 +1633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25cb613b17b54e47a919e06eeb2ed3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lengthOfGame: 3
+  currentDay: 0
 --- !u!1 &781750664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,6 +3730,9 @@ GameObject:
   - component: {fileID: 2090197109}
   - component: {fileID: 2090197108}
   - component: {fileID: 2090197105}
+  - component: {fileID: 2090196805}
+  - component: {fileID: 2090196801}
+  - component: {fileID: 2090196798}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -3750,7 +3754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1098.2616, y: 354.61713}
+  scrollPos: {x: 983.9762, y: 528.0866}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 403
@@ -3762,7 +3766,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 2090196879}
+  - {fileID: 2090196935}
   selectedCommands: []
   variables: []
   description: 
@@ -3831,6 +3835,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2090196798
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090196793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 458
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 726264874}
+  targetComponentAssemblyName: DailyMessage, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: DailyMessage
+  targetMethod: EndConversation
+  targetMethodText: 'EndConversation (): Void'
+  methodParameters: []
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
 --- !u!114 &2090196799
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3873,7 +3905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -515.2607
+    x: -615.26074
     y: -338.7942
     width: 133.6734
     height: 40
@@ -3885,6 +3917,34 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2090196916}
+--- !u!114 &2090196801
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090196793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 457
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 726264874}
+  targetComponentAssemblyName: DailyMessage, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: DailyMessage
+  targetMethod: EndConversation
+  targetMethodText: 'EndConversation (): Void'
+  methodParameters: []
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
 --- !u!114 &2090196802
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3965,6 +4025,34 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &2090196805
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090196793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 456
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 726264874}
+  targetComponentAssemblyName: DailyMessage, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: DailyMessage
+  targetMethod: EndConversation
+  targetMethodText: 'EndConversation (): Void'
+  methodParameters: []
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
 --- !u!114 &2090196806
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6064,6 +6152,7 @@ MonoBehaviour:
   - {fileID: 2090196942}
   - {fileID: 2090196941}
   - {fileID: 2090196940}
+  - {fileID: 2090196805}
 --- !u!114 &2090196919
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6240,7 +6329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -21.388458
+    x: -23.429274
     y: -404.25513
     width: 143.87749
     height: 40
@@ -6253,6 +6342,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 2090196924}
   - {fileID: 2090196923}
+  - {fileID: 2090196801}
 --- !u!114 &2090196926
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -6521,6 +6611,7 @@ MonoBehaviour:
   - {fileID: 2090196959}
   - {fileID: 2090196958}
   - {fileID: 2090196954}
+  - {fileID: 2090196798}
 --- !u!114 &2090196936
 MonoBehaviour:
   m_ObjectHideFlags: 2

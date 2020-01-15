@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Fungus;
 using UnityEngine;
 
+[System.Serializable]
 public class ServiceLocator 
 {
    //reference for all game managers this is created in the Game.cs
+   
    public static Game _game;
    public static DialogManager _dialogManager;
    public static DailyMessage _dailyMessage;

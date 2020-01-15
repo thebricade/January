@@ -10,7 +10,7 @@ public class MessageTiming : MonoBehaviour
     
     //quick debug amount of Days for messages
     public int lengthOfGame = 3;
-    
+    public int currentDay =0; 
     
     public void SetGoalTime()
     {
@@ -20,6 +20,7 @@ public class MessageTiming : MonoBehaviour
         Debug.Log("current time " +timeStampLastMessage);
         timeStampNextMessage = timeStampLastMessage.AddMinutes(3);
         Debug.Log(("next message will appear at " + timeStampNextMessage));
+        ServiceLocator._game.RunSave();
     }
 
     public bool CheckTimeMet()
@@ -38,6 +39,13 @@ public class MessageTiming : MonoBehaviour
 
     public int ReturnCurrentDay()
     {
-        
+        Debug.Log("current day is "+ currentDay );
+        return currentDay; 
+    }
+
+    public int AddDay()
+    {
+        currentDay++;
+        return currentDay;
     }
 }

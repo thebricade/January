@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a303a046-f51a-4724-bee8-da6f44864e27" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.January/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.January/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.January/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.January/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/20Days.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/20Days.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/DailyMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/DailyMessage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Game.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/MessageTiming.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MessageTiming.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/SaveLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/SaveLoad.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/ServiceLocator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ServiceLocator.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,6 +25,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Script/Mood.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/SaveFileEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/SaveLoad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/DailyMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Game.cs" root0="FORCE_HIGHLIGHTING" />
@@ -36,11 +39,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Script/Mood.cs" />
-        <option value="$PROJECT_DIR$/Assets/Script/SaveLoad.cs" />
-        <option value="$PROJECT_DIR$/Assets/Script/ServiceLocator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Script/Game.cs" />
-        <option value="$PROJECT_DIR$/Assets/Script/MessageTiming.cs" />
         <option value="$PROJECT_DIR$/Assets/Script/DailyMessage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/Game.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/SaveFileEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/MessageTiming.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/ServiceLocator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/SaveLoad.cs" />
       </list>
     </option>
   </component>
@@ -102,6 +106,8 @@
       <workItem from="1546881878849" duration="1729000" />
       <workItem from="1577913748626" duration="9387000" />
       <workItem from="1578017804435" duration="2258000" />
+      <workItem from="1578104716486" duration="6107000" />
+      <workItem from="1578468385788" duration="9205000" />
     </task>
     <task id="LOCAL-00001" summary="Mood game/ Script working with fungus flowchart to have one conversation a day with a character.">
       <created>1546904037504</created>

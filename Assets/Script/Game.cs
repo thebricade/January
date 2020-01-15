@@ -31,12 +31,19 @@ public class Game : MonoBehaviour
 
     public void RunSave()
     {
+        Debug.Log("Saving the game");
         SaveLoad.Save();
     }
 
     public void RunLoad()
     {
+        Debug.Log("Loading the game");
         SaveLoad.Load();
+    }
+
+    public void RunClear() //clears the current save file
+    {
+        
     }
 
 }

@@ -4,27 +4,37 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO; 
 using UnityEngine;
 
-public static class SaveLoad
-{
+public static class SaveLoad {
+ 
     public static List<Game> savedGames = new List<Game>();
-
-    public static void Save()
-    {
-        savedGames.Add(Game.current);
+             
+    //it's static so we can call it from anywhere
+    public static void Save() {
+        SaveLoad.savedGames.Add(Game.current);
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
-        bf.Serialize(file,SaveLoad.savedGames);
+        //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+        FileStream file = File.Create (Application.persistentDataPath + "/savedGames.gd");
+        file.Dispose();//you can call it anything you want
+        bf.Serialize(file, SaveLoad.savedGames);
         file.Close();
-    }
-
-    public static void Load()
-    {
-        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
-        {
+    }    
+     
+    public static void Load() {
+        if(File.Exists(Application.persistentDataPath + "/savedGames.gd")) {
+            Debug.Log(Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
-            SaveLoad.savedGames = (List<Game>) bf.Deserialize(file); //look over this and understand it
+            SaveLoad.savedGames = (List<Game>)bf.Deserialize(file);
             file.Close();
         }
     }
+    public static void Clear() {
+        /*SaveLoad.savedGames.Remove(Game.current);
+        BinaryFormatter bf = new BinaryFormatter();
+        //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+        FileStream file = File.OpenWrite(Application.persistentDataPath + "/savedGames.gd"); //you can call it anything you want
+        bf.Serialize(file, SaveLoad.savedGames);
+        file.Close(); */ 
+        File.Delete(Application.persistentDataPath + "/savedGames.gd");
+    }    
 }
