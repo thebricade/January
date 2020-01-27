@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Fungus;
 using UnityEngine;
 
-[System.Serializable]
+
 public class Game : MonoBehaviour
 {
     public static Game current;
@@ -31,14 +31,15 @@ public class Game : MonoBehaviour
 
     public void RunSave()
     {
-        Debug.Log("Saving the game");
-        SaveLoad.Save();
+        //ServiceLocator._dailyMessage.SaveConversation();
+        //ES3.Load<SaveData>("conversations", conversations); 
+        //Debug.Log("Saving the game");
+
     }
 
     public void RunLoad()
     {
-        Debug.Log("Loading the game");
-        SaveLoad.Load();
+       // Debug.Log("Loading the game");
     }
 
     public void RunClear() //clears the current save file

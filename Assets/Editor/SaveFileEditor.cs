@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 
@@ -12,7 +13,11 @@ public class SaveFileEditor : Editor
 
         if (GUILayout.Button("Delete Save File"))
         {
-            SaveLoad.Clear();
+            if (File.Exists(Application.persistentDataPath + "/SaveData.es3"))
+            {
+                File.Delete(Application.persistentDataPath +"/SaveData.es3");
+            }
+           
         }
     }
 }
