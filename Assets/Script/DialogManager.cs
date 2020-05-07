@@ -37,6 +37,12 @@ public class DialogManager : MonoBehaviour
             this.mood = mood;
             this.chatLog = chatLog; 
         }
+
+        public Dialog()
+        {
+            this.mood = GameMood.Angry;
+            this.chatLog = MessageNumber.Message1;
+        }
         
     }
 
