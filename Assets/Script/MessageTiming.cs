@@ -20,7 +20,7 @@ public class MessageTiming : MonoBehaviour
         Debug.Log("current time " +timeStampLastMessage);
         timeStampNextMessage = timeStampLastMessage.AddMinutes(3);
         Debug.Log(("next message will appear at " + timeStampNextMessage));
-        ServiceLocator._game.RunSave();
+        //ServiceLocator._game.RunSave();
     }
 
     public bool CheckTimeMet()

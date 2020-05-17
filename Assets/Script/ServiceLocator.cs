@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Fungus;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class ServiceLocator 
@@ -15,7 +16,9 @@ public class ServiceLocator
    public static AudioManager _audioManager;
    public static GameState _gameState;
    public static Flowchart _flowchart;
-   //public static SaveLoad _saveLoad; 
+
+   public static CanvasScaler _messagerCanvas; 
+   public static SaveLoad _saveLoad; 
 
 
 }

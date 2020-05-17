@@ -29,7 +29,7 @@ public class DailyMessage : MonoBehaviour
         conversations = SaveLoad.myData; 
         if (conversations == null) //if conversations doesn't exist we create a list of the messages with how many days the player can play '
         {
-           // SaveData myData = new SaveData()
+            SaveData myData = new SaveData();
            for (int i = 0; i < ServiceLocator._messageTiming.lengthOfGame; i++)
             {
                 conversations.Add(ServiceLocator._dialogManager.LoadMessage());

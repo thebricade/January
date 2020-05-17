@@ -21,7 +21,7 @@ public class SaveLoad : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void OnApplicationPause(bool pauseStatus)
