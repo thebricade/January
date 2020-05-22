@@ -23,8 +23,8 @@ public class DialogManager : MonoBehaviour
         public enum MessageNumber
         {
             Message1,
-            //Message2,
-            //Message3
+            Message2,
+            Message3
         }
 
         public GameMood mood;
@@ -54,7 +54,7 @@ public class DialogManager : MonoBehaviour
         if (!isVaildMessages())
         {
             messages = new ShuffleBag<Dialog>();
-            Debug.Log("running adding dialog messages");
+            Debug.Log("creating a new queue of dialogs");
             AddDialogToMessages();
         }
     }
@@ -75,7 +75,7 @@ public class DialogManager : MonoBehaviour
             }
         }
 
-        LoadMessage();
+        //LoadMessage();
         // messages.Add(new Dialog(Dialog.GameMood.Anxious));
     }
 

@@ -9,7 +9,7 @@ public class MessageTiming : MonoBehaviour
     private bool goalTime; 
     
     //quick debug amount of Days for messages
-    public int lengthOfGame = 3;
+    public int lengthOfGame = 2;
     public int currentDay =0; 
     
     public void SetGoalTime()
