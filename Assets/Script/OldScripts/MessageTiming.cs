@@ -9,7 +9,7 @@ public class MessageTiming : MonoBehaviour
     private bool goalTime; 
     
     //quick debug amount of Days for messages
-    public int lengthOfGame = 2;
+    public int lengthOfGame = 3;
     public int currentDay =0; 
     
     public void SetGoalTime()
@@ -25,14 +25,18 @@ public class MessageTiming : MonoBehaviour
 
     public bool CheckTimeMet()
     {
-        if (timeStampNextMessage >= timeStampLastMessage)
+        Debug.Log(timeStampLastMessage.ToString());
+        Debug.Log(timeStampNextMessage.ToString());
+        if (DateTime.Now > timeStampNextMessage)
         {
             goalTime = true;
         }
         else
         {
-            goalTime = false;
+            goalTime = false; 
         }
+        
+      
 
         return goalTime; 
     }

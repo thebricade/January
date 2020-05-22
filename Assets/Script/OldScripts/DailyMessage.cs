@@ -61,20 +61,23 @@ public class DailyMessage : MonoBehaviour
 
     public void CallConversation()
     {
-        Debug.Log("conversation called");
-        string nextBlock = (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() + conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString());
-        ServiceLocator._flowchart.ExecuteBlock(nextBlock);
-        conversations.RemoveAt(0);
-        /*if (ServiceLocator._messageTiming.CheckTimeMet()) // make this prettier create a toString function in the DialogManager that does this for me? 
+        
+        if (ServiceLocator._messageTiming.CheckTimeMet()) // make this prettier create a toString function in the DialogManager that does this for me? 
         {
-            Debug.Log(conversations[ServiceLocator._messageTiming.currentDay].mood.ToString()+conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString());
+            Debug.Log("conversation called");
             string nextBlock = (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() + conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString());
             ServiceLocator._flowchart.ExecuteBlock(nextBlock);
+            conversations.RemoveAt(0);
         }
         else
         {
             //change game state to where January isn't present on the page'
-        } */
+        } 
+    }
+
+    public void SetTime()
+    {
+        ServiceLocator._messageTiming.SetGoalTime();
     }
 
     public void EndConversation() //call this at the end of a conversation to perform setup for the next conversation
