@@ -11,18 +11,25 @@ public class QueueSample : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //pushNotifications = SaveLoad.myDataPushNotification;
+        pushNotifications = ES3.Load("pushNotifications", pushNotifications); 
         // queue each notification
-        pushNotifications.Enqueue("you received a new message");
-        pushNotifications.Enqueue("January wants to chat");
-        pushNotifications.Enqueue("are you there? ");
-        
+        if (pushNotifications.Count == 0)
+        {
+            pushNotifications.Enqueue("you received a new message");
+            pushNotifications.Enqueue("January wants to chat");
+            pushNotifications.Enqueue("are you there? ");
+            
+            //save our push notifications
+            ES3.Save<Queue>("pushNotifications",pushNotifications);
+        }
+
 
         Debug.Log(pushNotifications.Dequeue().ToString());
         
         var timeTrigger = new iOSNotificationTimeIntervalTrigger()
         {
-            TimeInterval = new TimeSpan(15, 3,0),
+            TimeInterval = new TimeSpan(0, 3,0),
             Repeats = false
         };
         

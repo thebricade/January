@@ -17,7 +17,8 @@ public class ServiceLocator
    public static Flowchart _flowchart;
 
    public static CanvasScaler _messagerCanvas; 
-   public static SaveLoad _saveLoad; 
+   public static SaveLoad _saveLoad;
+   public static QueueSample _queueSample; //this is the simple pushnotification script
 
 
 }

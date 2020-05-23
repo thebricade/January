@@ -32,6 +32,7 @@ public class Game : MonoBehaviour
     {
         ServiceLocator._game = this;
         ServiceLocator._saveLoad = gameObject.AddComponent<SaveLoad>();
+        ServiceLocator._queueSample = gameObject.AddComponent<QueueSample>();
         ServiceLocator._messagerCanvas = GameObject.Find("MessengerCanvas").GetComponent<CanvasScaler>(); 
         ServiceLocator._flowchart = GameObject.Find("Flowchart").GetComponent<Flowchart>();
         ServiceLocator._dialogManager = gameObject.AddComponent<DialogManager>();

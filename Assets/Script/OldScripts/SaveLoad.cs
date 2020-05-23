@@ -9,7 +9,8 @@ using UnityEngine;
 public class SaveLoad : MonoBehaviour
 {
     public static List<DialogManager.Dialog> myData;
-    public static DateTime myDataTime; 
+    public static DateTime myDataTime;
+    public static Queue myDataPushNotification;
    
     void Awake()
     {
@@ -18,6 +19,7 @@ public class SaveLoad : MonoBehaviour
         {
             myData = ES3.Load<List<DialogManager.Dialog>>("conversations");
             myDataTime = ES3.Load<DateTime>("nextMessage");
+            myDataPushNotification = ES3.Load<Queue>("pushNotifications");
         }
     }
 
