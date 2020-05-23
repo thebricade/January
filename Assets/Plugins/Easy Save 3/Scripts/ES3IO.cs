@@ -6,6 +6,8 @@ namespace ES3Internal
 {
 	public static class ES3IO
 	{
+        public static readonly string persistentDataPath = Application.persistentDataPath;
+
 		public enum ES3FileMode {Read, Write, Append}
 
 		public static DateTime GetTimestamp(string filePath)
@@ -50,7 +52,7 @@ namespace ES3Internal
 			if(slash == (path.Length - 1))
 				slash = path.Substring(0, slash).LastIndexOf(slashChar);
 			if(slash == -1)
-				Debug.LogError("Path provided is not a directory path as it contains no slashes.");
+				ES3Debug.LogError("Path provided is not a directory path as it contains no slashes.");
 			return path.Substring(0, slash);
 		}
 		
@@ -112,6 +114,8 @@ namespace ES3Internal
 
 		public static void CommitBackup(ES3Settings settings)
 		{
+            ES3Debug.Log("Committing backup for "+settings.path+" to storage location "+settings.location);
+
 			if(settings.location == ES3.Location.File)
 			{
 				// Delete the old file before overwriting it.

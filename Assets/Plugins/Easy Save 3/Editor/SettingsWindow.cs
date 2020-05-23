@@ -8,11 +8,12 @@ namespace ES3Editor
 {
 	public class SettingsWindow : SubWindow
 	{
-		public GameObject defaultSettingsGo = null;
-		public ES3DefaultSettings editorSettings = null;
+		public ES3Defaults editorSettings = null;
 		public ES3SerializableSettings settings = null;
 		public SerializedObject so = null;
 		public SerializedProperty assemblyNamesProperty = null;
+
+        private Vector2 scrollPos = Vector2.zero;
 
 		public SettingsWindow(EditorWindow window) : base("Settings", window){}
 
@@ -25,72 +26,95 @@ namespace ES3Editor
 
 			EditorGUI.BeginChangeCheck();
 
-			EditorGUILayout.BeginVertical(style.area);
+            using (var scrollView = new EditorGUILayout.ScrollViewScope(scrollPos, style.area))
+            {
+                scrollPos = scrollView.scrollPosition;
 
-			GUILayout.Label("Runtime Settings", style.heading);
+                GUILayout.Label("Runtime Settings", style.heading);
 
-			EditorGUILayout.BeginVertical(style.area);
+                using (new EditorGUILayout.VerticalScope(style.area))
+                {
+                    ES3SettingsEditor.Draw(settings);
+                }
 
-			ES3SettingsEditor.Draw(settings);
+                var wideLabel = new GUIStyle();
+                wideLabel.fixedWidth = 400;
 
-			EditorGUILayout.EndVertical();
+                GUILayout.Label("Debug Settings", style.heading);
 
-			GUILayout.Label("Editor Settings", style.heading);
+                using (new EditorGUILayout.VerticalScope(style.area))
+                {
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PrefixLabel("Log Info", wideLabel);
+                        editorSettings.logDebugInfo = EditorGUILayout.Toggle(editorSettings.logDebugInfo);
+                    }
 
-			EditorGUILayout.BeginVertical(style.area);
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PrefixLabel("Log Warnings", wideLabel);
+                        editorSettings.logWarnings = EditorGUILayout.Toggle(editorSettings.logWarnings);
+                    }
 
-			var wideLabel = new GUIStyle();
-			wideLabel.fixedWidth = 400;
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PrefixLabel("Log Errors", wideLabel);
+                        editorSettings.logErrors = EditorGUILayout.Toggle(editorSettings.logErrors);
+                    }
 
-			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.PrefixLabel("Auto Add Manager to Scene", wideLabel);
-			editorSettings.addMgrToSceneAutomatically = EditorGUILayout.Toggle(editorSettings.addMgrToSceneAutomatically);
-			EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+                }
 
-			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.PrefixLabel("Auto Update References", wideLabel);
-			editorSettings.autoUpdateReferences = EditorGUILayout.Toggle(editorSettings.autoUpdateReferences);
-			EditorGUILayout.EndHorizontal();
+                GUILayout.Label("Editor Settings", style.heading);
 
-			EditorGUILayout.Space();
+                using (new EditorGUILayout.VerticalScope(style.area))
+                {
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PrefixLabel("Auto Update References", wideLabel);
+                        editorSettings.autoUpdateReferences = EditorGUILayout.Toggle(editorSettings.autoUpdateReferences);
+                    }
 
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PrefixLabel("Use Global References", wideLabel);
 
-			// Show Assembly names array.
-			EditorGUILayout.PropertyField(assemblyNamesProperty, new GUIContent("Assemblies containing ES3Types", "The names of assemblies we want to load ES3Types from."), true); // True means show children
-			if(so.ApplyModifiedProperties())
-			{
-				#if UNITY_2018_3_OR_NEWER
-				PrefabUtility.SaveAsPrefabAsset(defaultSettingsGo, "Assets/Plugins/Easy Save 3/Resources/ES3/ES3 Default Settings.prefab");
-				#endif
-			}
+                        var symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+                        bool useGlobalReferences = !symbols.Contains("ES3GLOBAL_DISABLED");
+                        if(EditorGUILayout.Toggle(useGlobalReferences) != useGlobalReferences)
+                        {
+                            // Remove the existing symbol even if we're disabling global references, just incase it's already in there.
+                            symbols = symbols.Replace("ES3GLOBAL_DISABLED;", ""); // With semicolon
+                            symbols = symbols.Replace("ES3GLOBAL_DISABLED", "");  // Without semicolon
 
-			EditorGUILayout.EndVertical();
+                            // Add the symbol if useGlobalReferences is currently true, meaning that we want to disable it.
+                            if (useGlobalReferences)
+                                symbols = "ES3GLOBAL_DISABLED;" + symbols;
 
-			EditorGUILayout.EndVertical();
+                            PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, symbols);
 
+                            if(useGlobalReferences)
+                                EditorUtility.DisplayDialog("Global references disabled for build platform", "This will only disable Global References for this build platform. To disable it for other build platforms, open that platform in the Build Settings and uncheck this box again.", "Ok");
+                        }
+                    }
 
-			if(EditorGUI.EndChangeCheck())
-				EditorUtility.SetDirty(editorSettings);
+                    EditorGUILayout.Space();
+                }
+            }
+
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(editorSettings);
 		}
 
 		public void Init()
 		{
-			#if UNITY_2018_3_OR_NEWER
-			defaultSettingsGo = (GameObject)AssetDatabase.LoadMainAssetAtPath("Assets/Plugins/Easy Save 3/Resources/ES3/ES3 Default Settings.prefab");
-			editorSettings = defaultSettingsGo.GetComponent<ES3DefaultSettings>();
-			#else
-			editorSettings = ES3Settings.GetDefaultSettings();
-			#endif
+            editorSettings = ES3Settings.defaultSettingsScriptableObject;
 
 			settings = editorSettings.settings;
-			so = new SerializedObject(editorSettings);
+			/*so = new SerializedObject(editorSettings);
 			var settingsProperty = so.FindProperty("settings");
-			assemblyNamesProperty = settingsProperty.FindPropertyRelative("assemblyNames");
+			assemblyNamesProperty = settingsProperty.FindPropertyRelative("assemblyNames");*/
 			
-			
-			#if UNITY_2018_3_OR_NEWER
-			PrefabUtility.SavePrefabAsset(defaultSettingsGo);
-			#endif
 		}
 	}
 

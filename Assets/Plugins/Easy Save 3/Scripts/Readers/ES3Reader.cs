@@ -12,6 +12,8 @@ public abstract class ES3Reader : System.IDisposable
 	/// <summary>The settings used to create this reader.</summary>
 	public ES3Settings settings;
 
+    protected int serializationDepth = 0;
+
 	#region ES3Reader Abstract Methods
 
 	internal abstract int 		Read_int();
@@ -29,9 +31,11 @@ public abstract class ES3Reader : System.IDisposable
 	internal abstract uint 		Read_uint();
 	internal abstract string 	Read_string();
 	internal abstract byte[]	Read_byteArray();
+    internal abstract long      Read_ref();
 
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-	public abstract string ReadPropertyName();
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public abstract string ReadPropertyName();
+
 	protected abstract Type ReadKeyPrefix(bool ignore = false);
 	protected abstract void ReadKeySuffix();
 	internal abstract byte[] ReadElement(bool skip=false);
@@ -39,8 +43,16 @@ public abstract class ES3Reader : System.IDisposable
 	/// <summary>Disposes of the reader and it's underlying stream.</summary>
 	public abstract void Dispose();
 
-	internal abstract bool StartReadObject();
-	internal abstract void EndReadObject();
+	internal virtual bool StartReadObject()
+    {
+        serializationDepth++;
+        return true;
+    }
+
+	internal virtual void EndReadObject()
+    {
+        serializationDepth--;
+    }
 
 	internal abstract bool StartReadDictionary();
 	internal abstract void EndReadDictionary();
@@ -119,7 +131,14 @@ public abstract class ES3Reader : System.IDisposable
 		return Read<T>(type);
 	}
 
-	internal Type ReadType()
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public long ReadRefProperty()
+    {
+        ReadPropertyName();
+        return Read_ref();
+    }
+
+    internal Type ReadType()
 	{
 		return Type.GetType(Read<string>(ES3Type_string.Instance));
 	}
@@ -174,7 +193,6 @@ public abstract class ES3Reader : System.IDisposable
 			return defaultValue;
 
 		Type type = ReadTypeFromHeader<T>();
-
 		T obj = Read<T>(ES3TypeMgr.GetOrCreateES3Type(type));
 
 		ReadKeySuffix();
@@ -257,11 +275,11 @@ public abstract class ES3Reader : System.IDisposable
 		else
 			ReadObject<T>(obj, type);
 	}
-		
 
-	#endregion
 
-	private Type ReadTypeFromHeader<T>()
+    #endregion
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    internal Type ReadTypeFromHeader<T>()
 	{
 		// Check whether we need to determine the type by reading the header.
 		if(typeof(T) == typeof(object))

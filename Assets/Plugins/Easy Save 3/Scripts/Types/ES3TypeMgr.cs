@@ -9,6 +9,8 @@ namespace ES3Internal
 	[UnityEngine.Scripting.Preserve]
 	public static class ES3TypeMgr
 	{
+        private static object _lock = new object();
+
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
 		public static Dictionary<Type, ES3Type> types = null;
 
@@ -39,7 +41,15 @@ namespace ES3Internal
 		{
 			if(types == null)
 				Init();
-			types[type] = es3Type;
+
+            var existingType = GetES3Type(type);
+            if (existingType != null && existingType.priority > es3Type.priority)
+                return;
+
+            lock (_lock)
+            {
+                types[type] = es3Type;
+            }
 		}
 
 		internal static ES3Type CreateES3Type(Type type, bool throwException = true)
@@ -108,23 +118,25 @@ namespace ES3Internal
 			{
 				if(throwException)
 					throw new NotSupportedException(string.Format("ES3Type.type is null when trying to create an ES3Type for {0}, possibly because the element type is not supported.", type));
-
 				return null;
 			}
 
-			Add(type, es3Type);
+            Add(type, es3Type);
 			return es3Type;
 		}
 
-		internal static void Init()
-		{
-			types = new Dictionary<Type, ES3Type>();
-			// ES3Types add themselves to the types Dictionary.
-			ES3Reflection.GetInstances<ES3Type>();
+        internal static void Init()
+        {
+            lock (_lock)
+            {
+                types = new Dictionary<Type, ES3Type>();
+                // ES3Types add themselves to the types Dictionary.
+                ES3Reflection.GetInstances<ES3Type>();
 
-			// Check that the type list was initialised correctly.
-			if(types == null || types.Count == 0)
-				throw new TypeLoadException("Type list could not be initialised. Please contact Easy Save developers on mail@moodkie.com.");
-		}
+                // Check that the type list was initialised correctly.
+                if (types == null || types.Count == 0)
+                    throw new TypeLoadException("Type list could not be initialised. Please contact Easy Save developers on mail@moodkie.com.");
+            }
+        }
 	}
 }

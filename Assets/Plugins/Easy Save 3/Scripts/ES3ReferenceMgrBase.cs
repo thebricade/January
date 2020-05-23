@@ -6,250 +6,463 @@ using System;
 
 namespace ES3Internal
 {
-	[System.Serializable]
-	[DisallowMultipleComponent]
-	public abstract class ES3ReferenceMgrBase : MonoBehaviour
-	{
-		public const string referencePropertyName = "_ES3Ref";
-		private static ES3ReferenceMgrBase _current = null;
+    [System.Serializable]
+    [DisallowMultipleComponent]
+    public abstract class ES3ReferenceMgrBase : MonoBehaviour
+    {
+        private object _lock = new object();
 
-		private static System.Random rng;
+        public const string referencePropertyName = "_ES3Ref";
+        private static ES3ReferenceMgrBase _current = null;
+#if UNITY_EDITOR
+        private const int CollectDependenciesDepth = 5;
+        protected static bool isEnteringPlayMode = false;
+#endif
 
-		[HideInInspector]
-		public bool openReferences = false; // Whether the reference Dictionary should be open in the Editor.
-		[HideInInspector]
-		public bool openPrefabs = false; // Whether the prefab list should be open in the Editor.
+        private static System.Random rng;
 
-		public static ES3ReferenceMgrBase Current
-		{
-			get
-			{
-				if(_current == null)
-				{
-					var mgrs = UnityEngine.Object.FindObjectsOfType<ES3ReferenceMgrBase>();
-					if(mgrs.Length == 1)
-						_current = mgrs[0];
-					else if(mgrs.Length > 1)
-						throw new InvalidOperationException("There is more than one ES3ReferenceMgr in this scene, but there must only be one.");
-				}
-				return _current; 
-			}
-		}
+        [HideInInspector]
+        public bool openPrefabs = false; // Whether the prefab list should be open in the Editor.
 
-		public bool IsInitialised{ get{ return idRef.Count > 0; } }
+        public List<ES3Prefab> prefabs = new List<ES3Prefab>();
 
-		[SerializeField]
-		public ES3IdRefDictionary idRef = new ES3IdRefDictionary();
-		private ES3RefIdDictionary _refId = null;
+        public static ES3ReferenceMgrBase Current
+        {
+            get
+            {
+                if (_current == null)
+                {
+                    var mgrs = UnityEngine.Object.FindObjectsOfType<ES3ReferenceMgrBase>();
+                    if (mgrs.Length == 1)
+                        _current = mgrs[0];
+                    else if (mgrs.Length > 1)
+                        throw new InvalidOperationException("There is more than one ES3ReferenceMgr in this scene, but there must only be one.");
+                }
+                return _current;
+            }
+        }
 
-		public ES3RefIdDictionary refId
-		{
-			get
-			{
-				if(_refId == null)
-				{
-					_refId = new ES3RefIdDictionary();
-					// Populate the reverse dictionary with the items from the normal dictionary.
-					foreach (var kvp in idRef)
-						if(kvp.Value != null)
-							_refId [kvp.Value] = kvp.Key;
-				}
-				return _refId;
-			}
-			set
-			{
-				_refId = value;
-			}
-		}
+        public bool IsInitialised { get { return idRef.Count > 0; } }
 
-		public List<ES3Prefab> prefabs = new List<ES3Prefab>();
+        [SerializeField]
+        public ES3IdRefDictionary idRef = new ES3IdRefDictionary();
+        private ES3RefIdDictionary _refId = null;
 
-		public void Awake()
-		{
-			if(_current != null && _current != this)
-			{
-				_current.Merge(this);
-				if(gameObject.name.Contains("Easy Save 3 Manager"))
-					Destroy(this.gameObject);
-				else
-					Destroy(this);
-			}
-			else
-				_current = this;
-		}
+        public ES3RefIdDictionary refId
+        {
+            get
+            {
+                if (_refId == null)
+                {
+                    _refId = new ES3RefIdDictionary();
+                    // Populate the reverse dictionary with the items from the normal dictionary.
+                    foreach (var kvp in idRef)
+                        if (kvp.Value != null)
+                            _refId[kvp.Value] = kvp.Key;
+                }
+                return _refId;
+            }
+            set
+            {
+                _refId = value;
+            }
+        }
 
-		// Merges two managers, not allowing any clashes of IDs
-		public void Merge(ES3ReferenceMgrBase otherMgr)
-		{
-			foreach(var kvp in otherMgr.idRef)
-			{
-				// Check for duplicate keys with different values.
-				UnityEngine.Object value;
-				if(idRef.TryGetValue(kvp.Key, out value))
-				{
-					if(value != kvp.Value)
-						throw new ArgumentException ("Attempting to merge two ES3 Reference Managers, but they contain duplicate IDs. If you've made a copy of a scene and you're trying to load it additively into another scene, generate new reference IDs by going to Assets > Easy Save 3 > Generate New Reference IDs for Scene. Alternatively, remove the Easy Save 3 Manager from the scene if you do not intend on saving any data from it.");
-				}
-				else
-					Add(kvp.Value, kvp.Key);
-			}
-		}
+        public ES3GlobalReferences GlobalReferences
+        {
+            get
+            {
+                return ES3GlobalReferences.Instance;
+            }
+        }
 
-		public long Get(UnityEngine.Object obj)
-		{
-			long id;
-			if(!refId.TryGetValue(obj, out id))
-				return -1;
-			return id;
-		}
+        public void Awake()
+        {
+            if (_current != null && _current != this)
+            {
+                _current.Merge(this);
+                if (gameObject.name.Contains("Easy Save 3 Manager"))
+                    Destroy(this.gameObject);
+                else
+                    Destroy(this);
+            }
+            else
+                _current = this;
+        }
 
-		public UnityEngine.Object Get(long id)
-		{
-			if(id == -1)
-				return null;
-			UnityEngine.Object obj;
-			if(!idRef.TryGetValue(id, out obj))
-				return null;
-			return obj;
-		}
+        // Merges two managers, not allowing any clashes of IDs
+        public void Merge(ES3ReferenceMgrBase otherMgr)
+        {
+            foreach (var kvp in otherMgr.idRef)
+                Add(kvp.Value, kvp.Key);
+        }
 
-		public ES3Prefab GetPrefab(long id)
-		{
-			for(int i=0; i<prefabs.Count; i++)
-				if(prefabs[i] != null && prefabs[i].prefabId == id)
-					return prefabs[i];
-			return null;
-		}
+        public long Get(UnityEngine.Object obj)
+        {
+            if (obj == null)
+                return -1;
+            long id;
+            if (!refId.TryGetValue(obj, out id))
+                return -1;
+            return id;
+        }
 
-		public long GetPrefab(ES3Prefab prefab)
-		{
-			for(int i=0; i<prefabs.Count; i++)
-				if(prefabs[i] == prefab)
-					return prefabs[i].prefabId;
-			return -1;
-		}
+        internal UnityEngine.Object Get(long id, Type type)
+        {
+            if (id == -1)
+                return null;
+            UnityEngine.Object obj;
+            if (!idRef.TryGetValue(id, out obj))
+            {
+                if (GlobalReferences != null)
+                {
+                    var globalRef = GlobalReferences.Get(id);
+                    if (globalRef != null)
+                        return globalRef;
+                }
 
-		public long Add(UnityEngine.Object obj)
-		{
-			long id; 
-			// If it already exists in the list, do nothing.
-			if(refId.TryGetValue(obj, out id))
-				return id;
-			// Add the reference to the Dictionary.
-			id = GetNewRefID();
-			Add(obj, id);
-			return id;
-		}
+                ES3Debug.LogWarning("Reference for " + type + " with ID " + id + " could not be found in Easy Save's reference manager. Try pressing the Refresh References button on the ES3ReferenceMgr Component of the Easy Save 3 Manager in your scene. If you are loading objects dynamically, this warning is expected and can be ignored.", this);
+                return null;
+            }
+            if (obj == null) // If obj has been marked as destroyed but not yet destroyed, don't return it.
+                return null;
+            return obj;
+        }
 
-		public void Add(UnityEngine.Object obj, long id)
-		{
-			// If the ID is -1, auto-generate an ID.
-			if(id == -1)
-				id = GetNewRefID();
-			// Add the reference to the Dictionary.
-			idRef[id] = obj;
-			refId [obj] = id;
-		}
+        public UnityEngine.Object Get(long id, bool suppressWarnings = false)
+        {
+            if (id == -1)
+                return null;
+            UnityEngine.Object obj;
+            if (!idRef.TryGetValue(id, out obj))
+            {
+                if (GlobalReferences != null)
+                {
+                    var globalRef = GlobalReferences.Get(id);
+                    if (globalRef != null)
+                        return globalRef;
+                }
 
-		public void AddPrefab(ES3Prefab prefab)
-		{
-			if(!prefabs.Contains(prefab))
-				prefabs.Add(prefab);
-		}
+                if (!suppressWarnings) ES3Internal.ES3Debug.LogWarning("Reference for property ID " + id + " could not be found in Easy Save's reference manager. Try pressing the Refresh References button on the ES3ReferenceMgr Component of the Easy Save 3 Manager in your scene. If you are loading objects dynamically, this warning is expected and can be ignored.", this);
+                return null;
+            }
+            if (obj == null) // If obj has been marked as destroyed but not yet destroyed, don't return it.
+                return null;
+            return obj;
+        }
 
-		public void Remove(UnityEngine.Object obj)
-		{
-			long referenceID;
+        public ES3Prefab GetPrefab(long id, bool suppressWarnings = false)
+        {
+            for (int i = 0; i < prefabs.Count; i++)
+                if (prefabs[i] != null && prefabs[i].prefabId == id)
+                    return prefabs[i];
+            if (!suppressWarnings) ES3Internal.ES3Debug.LogWarning("Prefab with ID " + id + " could not be found in Easy Save's reference manager. Try pressing the Refresh References button on the ES3ReferenceMgr Component of the Easy Save 3 Manager in your scene.", this);
+            return null;
+        }
 
-			// Get the reference ID, or do nothing if it doesn't exist.
-			if(refId.TryGetValue(obj, out referenceID))
-				return;
-			
-			refId.Remove(obj);
-			idRef.Remove(referenceID);
-		}
+        public long GetPrefab(ES3Prefab prefab, bool suppressWarnings = false)
+        {
+            for (int i = 0; i < prefabs.Count; i++)
+                if (prefabs[i] == prefab)
+                    return prefabs[i].prefabId;
+            if (!suppressWarnings) ES3Internal.ES3Debug.LogWarning("Prefab with name " + prefab.name + " could not be found in Easy Save's reference manager. Try pressing the Refresh References button on the ES3ReferenceMgr Component of the Easy Save 3 Manager in your scene.", prefab);
+            return -1;
+        }
 
-		public void Remove(long referenceID)
-		{
-			UnityEngine.Object obj;
-			// Get the reference ID, or do nothing if it doesn't exist.
-			if(!idRef.TryGetValue(referenceID, out obj))
-				return;
+        public long Add(UnityEngine.Object obj)
+        {
+            long id;
+            // If it already exists in the list, do nothing.
+            if (refId.TryGetValue(obj, out id))
+                return id;
 
-			refId.Remove(obj);
-			idRef.Remove(referenceID);
-		}
+            if (GlobalReferences != null)
+            {
+                id = GlobalReferences.GetOrAdd(obj);
+                if (id != -1)
+                {
+                    Add(obj, id);
+                    return id;
+                }
+            }
 
-		public void RemoveNullValues()
-		{
-			var nullKeys = idRef.Where(pair => pair.Value == null)
-								.Select(pair => pair.Key).ToList();
-			foreach (var key in nullKeys)
-				idRef.Remove(key);
-		}
+            lock (_lock)
+            {
+                // Add the reference to the Dictionary.
+                id = GetNewRefID();
+                return Add(obj, id);
+            }
+        }
 
-		public void Clear()
-		{
-			refId.Clear();
-			idRef.Clear();
-		}
+        public long Add(UnityEngine.Object obj, long id)
+        {
+            if (!CanBeSaved(obj))
+                return -1;
 
-		public bool Contains(UnityEngine.Object obj)
-		{
-			return refId.ContainsKey(obj);
-		}
+            // If the ID is -1, auto-generate an ID.
+            if (id == -1)
+                id = GetNewRefID();
+            // Add the reference to the Dictionary.
+            lock (_lock)
+            {
+                idRef[id] = obj;
+                refId[obj] = id;
+            }
+                return id;
+        }
 
-		public bool Contains(long referenceID)
-		{
-			return idRef.ContainsKey(referenceID);
-		}
+        public void AddPrefab(ES3Prefab prefab)
+        {
+            if (!prefabs.Contains(prefab))
+                prefabs.Add(prefab);
+        }
 
-		public void ChangeId(long oldId, long newId)
-		{
-			idRef.ChangeKey(oldId, newId);
-			// Empty the refId so it has to be refreshed.
-			refId = null;
-		}
+        public void Remove(UnityEngine.Object obj)
+        {
+            lock(_lock)
+            {
+                refId.Remove(obj);
+                // There may be multiple references with the same ID, so remove them all.
+                foreach (var item in idRef.Where(kvp => kvp.Value == obj).ToList())
+                    idRef.Remove(item.Key);
+            }
+        }
 
-		internal static long GetNewRefID()
-		{
-			if(rng == null)
-				rng = new System.Random();
+        public void Remove(long referenceID)
+        {
+            lock (_lock)
+            {
+                idRef.Remove(referenceID);
+                // There may be multiple references with the same ID, so remove them all.
+                foreach (var item in refId.Where(kvp => kvp.Value == referenceID).ToList())
+                    refId.Remove(item.Key);
+            }
+        }
 
-			byte[] buf = new byte[8];
-			rng.NextBytes(buf);
-			long longRand = BitConverter.ToInt64(buf, 0);
+        public void RemoveNullValues()
+        {
+            var nullKeys = idRef.Where(pair => pair.Value == null)
+                                .Select(pair => pair.Key).ToList();
+            foreach (var key in nullKeys)
+                idRef.Remove(key);
 
-			return (System.Math.Abs(longRand % (long.MaxValue - 0)) + 0);
-		}
-	}
+            this.GlobalReferences.RemoveInvalidKeys();
+        }
 
-	[System.Serializable]
-	public class ES3IdRefDictionary : ES3SerializableDictionary<long, UnityEngine.Object>
-	{
-		protected override bool KeysAreEqual(long a, long b)
-		{
-			return a == b;
-		}
+        public void Clear()
+        {
+            lock (_lock)
+            {
+                refId.Clear();
+                idRef.Clear();
+            }
+        }
 
-		protected override bool ValuesAreEqual(UnityEngine.Object a, UnityEngine.Object b)
-		{
-			return a == b;
-		}
-	}
+        public bool Contains(UnityEngine.Object obj)
+        {
+            return refId.ContainsKey(obj);
+        }
 
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-	[System.Serializable]
-	public class ES3RefIdDictionary : ES3SerializableDictionary<UnityEngine.Object, long>
-	{
-		protected override bool KeysAreEqual(UnityEngine.Object a, UnityEngine.Object b)
-		{
-			return a == b;
-		}
+        public bool Contains(long referenceID)
+        {
+            return idRef.ContainsKey(referenceID);
+        }
 
-		protected override bool ValuesAreEqual(long a, long b)
-		{
-			return a == b;
-		}
-	}
+        public void ChangeId(long oldId, long newId)
+        {
+            idRef.ChangeKey(oldId, newId);
+            // Empty the refId so it has to be refreshed.
+            refId = null;
+        }
+
+        internal static long GetNewRefID()
+        {
+            if (rng == null)
+                rng = new System.Random();
+
+            byte[] buf = new byte[8];
+            rng.NextBytes(buf);
+            long longRand = BitConverter.ToInt64(buf, 0);
+
+            return (System.Math.Abs(longRand % (long.MaxValue - 0)) + 0);
+        }
+
+#if UNITY_EDITOR
+        /*
+         * Collects all top-level dependencies of an object.
+         * For GameObjects, it will traverse all children.
+         * For Components or ScriptableObjects, it will get all serialisable UnityEngine.Object fields/properties as dependencies.
+         */
+        public static HashSet<UnityEngine.Object> CollectDependencies(UnityEngine.Object[] objs, HashSet<UnityEngine.Object> dependencies = null, int depth = CollectDependenciesDepth)
+        {
+            if (depth < 0)
+                return dependencies;
+
+            if (dependencies == null)
+                dependencies = new HashSet<UnityEngine.Object>(objs);
+            else
+                dependencies.UnionWith(objs);
+
+            foreach (var obj in objs)
+            {
+                if (obj == null)
+                    continue;
+
+                var type = obj.GetType();
+                // Skip types which don't need processing
+                if (type == typeof(ES3ReferenceMgr) || type == typeof(ES3Prefab) || type == typeof(ES3AutoSaveMgr) || type == typeof(ES3AutoSave) || type == typeof(ES3InspectorInfo))
+                    continue;
+
+                // If it's a GameObject, get the GameObject's Components and collect their dependencies.
+                if (type == typeof(GameObject))
+                {
+                    var go = (GameObject)obj;
+                    // Get the dependencies of each Component in the GameObject.
+                    CollectDependencies(go.GetComponents<Component>(), dependencies, depth - 1);
+                    // Get the dependencies of each child in the GameObject.
+                    foreach (Transform child in go.transform)
+                        CollectDependencies(child.gameObject, dependencies, depth); // Don't decrement child, as we consider this a top-level object.
+                }
+                // Else if it's a Component or ScriptableObject, add the values of any UnityEngine.Object fields as dependencies.
+                else
+                    CollectDependenciesFromFields(obj, dependencies, depth - 1);
+            }
+
+            return dependencies;
+        }
+
+        public static HashSet<UnityEngine.Object> CollectDependencies(UnityEngine.Object obj, HashSet<UnityEngine.Object> dependencies = null, int depth = CollectDependenciesDepth)
+        {
+            return CollectDependencies(new UnityEngine.Object[] { obj }, dependencies, depth);
+        }
+
+        private static void CollectDependenciesFromFields(UnityEngine.Object obj, HashSet<UnityEngine.Object> dependencies, int depth)
+        {
+            if (depth < 0)
+                return;
+
+            if (isEnteringPlayMode && obj.GetType() == typeof(UnityEngine.UI.Text))
+                return;
+
+            var so = new UnityEditor.SerializedObject(obj);
+            if (so == null)
+                return;
+
+            var property = so.GetIterator();
+            if (property == null)
+                return;
+
+            // Iterate through each of this object's properties.
+            while (property.NextVisible(true))
+            {
+                try
+                {
+                    // If it's an array which contains UnityEngine.Objects, add them as dependencies.
+                    if (property.isArray)
+                    {
+                        for (int i = 0; i < property.arraySize; i++)
+                        {
+                            var element = property.GetArrayElementAtIndex(i);
+                            // If the array contains UnityEngine.Object types, add them to the dependencies.
+                            if (element.propertyType == UnityEditor.SerializedPropertyType.ObjectReference && element.objectReferenceValue != null)
+                            {
+                                var propertyType = element.objectReferenceValue.GetType();
+
+                                // If it's a GameObject, use CollectDependencies so that Components are also added.
+                                if (element.objectReferenceValue.GetType() == typeof(GameObject))
+                                {
+                                    // Only collect deeper dependencies if this GameObject hasn't already had its dependencies added.
+                                    if (dependencies.Add(element.objectReferenceValue))
+                                        CollectDependencies(element.objectReferenceValue, dependencies, depth - 1);
+                                }
+                                else
+                                {
+                                    // Only collect more dependencies if we've not already added them for this object.
+                                    if (dependencies.Add(element.objectReferenceValue))
+                                        CollectDependenciesFromFields(element.objectReferenceValue, dependencies, depth - 1);
+                                }
+                            }
+                            // Otherwise this array does not contain UnityEngine.Object types, so we should stop.
+                            else
+                                break;
+                        }
+                    }
+                    // Else if it's a normal UnityEngine.Object field, add it.
+                    else if (property.propertyType == UnityEditor.SerializedPropertyType.ObjectReference && property.objectReferenceValue != null)
+                    {
+                        // If it's a GameObject, use CollectDependencies so that Components are also added.
+                        if (property.objectReferenceValue.GetType() == typeof(GameObject))
+                        {
+                            // Only collect deeper dependencies if this GameObject hasn't already had its dependencies added.
+                            if (dependencies.Add(property.objectReferenceValue))
+                                CollectDependencies(property.objectReferenceValue, dependencies, depth - 1);
+                        }
+                        else
+                        {
+                            // Only add more dependencies if we've not already added them for this object.
+                            if (dependencies.Add(property.objectReferenceValue))
+                                CollectDependenciesFromFields(property.objectReferenceValue, dependencies, depth - 1);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+#endif
+
+        internal static bool CanBeSaved(UnityEngine.Object obj)
+        {
+#if UNITY_EDITOR
+            if (obj == null)
+                return true;
+
+            var type = obj.GetType();
+
+            // Check if any of the hide flags determine that it should not be saved.
+            if ((((obj.hideFlags & HideFlags.DontSave) == HideFlags.DontSave) ||
+                 ((obj.hideFlags & HideFlags.DontSaveInBuild) == HideFlags.DontSaveInBuild) ||
+                 ((obj.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor) ||
+                 ((obj.hideFlags & HideFlags.HideAndDontSave) == HideFlags.HideAndDontSave)))
+            {
+                // Meshes are marked with HideAndDontSave, but shouldn't be ignored.
+                if (type == typeof(Mesh) || type == typeof(Material))
+                    return true;
+            }
+
+            // Exclude the Easy Save 3 Manager, and all components attached to it.
+            if (obj.name == "Easy Save 3 Manager")
+                return false;
+#endif
+            return true;
+        }
+    }
+
+    [System.Serializable]
+    public class ES3IdRefDictionary : ES3SerializableDictionary<long, UnityEngine.Object>
+    {
+        protected override bool KeysAreEqual(long a, long b)
+        {
+            return a == b;
+        }
+
+        protected override bool ValuesAreEqual(UnityEngine.Object a, UnityEngine.Object b)
+        {
+            return a == b;
+        }
+    }
+
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [System.Serializable]
+    public class ES3RefIdDictionary : ES3SerializableDictionary<UnityEngine.Object, long>
+    {
+        protected override bool KeysAreEqual(UnityEngine.Object a, UnityEngine.Object b)
+        {
+            return a == b;
+        }
+
+        protected override bool ValuesAreEqual(long a, long b)
+        {
+            return a == b;
+        }
+    }
 }

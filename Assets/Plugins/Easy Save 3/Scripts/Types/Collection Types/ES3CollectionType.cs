@@ -15,7 +15,8 @@ namespace ES3Types
 
 		public abstract void Write(object obj, ES3Writer writer, ES3.ReferenceMode memberReferenceMode);
 
-		public ES3CollectionType(Type type) : base(type)
+        [UnityEngine.Scripting.Preserve]
+        public ES3CollectionType(Type type) : base(type)
 		{
 			elementType = ES3TypeMgr.GetOrCreateES3Type(ES3Reflection.GetElementTypes(type)[0], false);
 			isCollection = true;
@@ -25,18 +26,21 @@ namespace ES3Types
 				isUnsupported = true;
 		}
 
-		public ES3CollectionType(Type type, ES3Type elementType) : base(type)
+        [UnityEngine.Scripting.Preserve]
+        public ES3CollectionType(Type type, ES3Type elementType) : base(type)
 		{
 			this.elementType = elementType;
 			isCollection = true;
 		}
 
-		public override void Write(object obj, ES3Writer writer)
+        [UnityEngine.Scripting.Preserve]
+        public override void Write(object obj, ES3Writer writer)
 		{
 			Write(obj, writer, ES3.ReferenceMode.ByRefAndValue);
 		}
 
-		protected virtual bool ReadICollection<T>(ES3Reader reader, ICollection<T> collection, ES3Type elementType)
+        [UnityEngine.Scripting.Preserve]
+        protected virtual bool ReadICollection<T>(ES3Reader reader, ICollection<T> collection, ES3Type elementType)
 		{
 			if(reader.StartReadCollection())
 				return false;
@@ -57,7 +61,8 @@ namespace ES3Types
 			return true;
 		}
 
-		protected virtual void ReadICollectionInto<T>(ES3Reader reader, ICollection<T> collection, ES3Type elementType)
+        [UnityEngine.Scripting.Preserve]
+        protected virtual void ReadICollectionInto<T>(ES3Reader reader, ICollection<T> collection, ES3Type elementType)
 		{
 			if(reader.StartReadCollection())
 				throw new NullReferenceException("The Collection we are trying to load is stored as null, which is not allowed when using ReadInto methods.");

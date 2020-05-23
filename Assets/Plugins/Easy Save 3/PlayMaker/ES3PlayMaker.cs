@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ES3Internal;
 using HutongGames.PlayMaker.Actions;
 using HutongGames.PlayMaker;
 using Tooltip = HutongGames.PlayMaker.TooltipAttribute;
@@ -211,7 +212,43 @@ namespace ES3PlayMaker
 		}
 	}
 
-	[ActionCategory("Easy Save 3")]
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Saves all FsmVariables in this FSM to a file with the given key.")]
+    public class SaveAll : SettingsAction
+    {
+        [Tooltip("The unique key we want to use to identity the data we are saving.")]
+        public FsmString key;
+
+        [Tooltip("Save the local variables accessible in this FSM?")]
+        public FsmBool saveFsmVariables = true;
+        [Tooltip("Save the global variables accessible in all FSMs?")]
+        public FsmBool saveGlobalVariables = true;
+
+        public override void OnReset()
+        {
+            key = "key";
+        }
+
+        public override void Enter()
+        {
+            // Get FSMVariables objects required based on whether the user wants to save local variables, global variables or both.
+            var variableLists = new List<FsmVariables>();
+
+            if (saveFsmVariables.Value)
+                variableLists.Add(Fsm.Variables);
+            if (saveGlobalVariables.Value)
+                variableLists.Add(FsmVariables.GlobalVariables);
+
+            var dict = new Dictionary<string, object>();
+
+            foreach (var variableList in variableLists)
+                foreach (var fsmVariable in variableList.GetAllNamedVariables())
+                    dict.Add(fsmVariable.Name, fsmVariable.RawValue);
+            ES3.Save<Dictionary<string, object>>(key.Value, dict);
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
 	[Tooltip("Saves a byte array as a file, overwriting any existing files.")]
 	public class SaveRaw : SettingsAction
 	{
@@ -348,7 +385,43 @@ namespace ES3PlayMaker
 		}
 	}
 
-	[ActionCategory("Easy Save 3")]
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Loads all FsmVariables in this FSM to a file with the given key.")]
+    public class LoadAll : SettingsAction
+    {
+        [Tooltip("The key we used to save the data we're loading.")]
+        public FsmString key;
+
+        [Tooltip("Load the local variables accessible in this FSM?")]
+        public FsmBool loadFsmVariables = true;
+        [Tooltip("Load the global variables accessible in all FSMs?")]
+        public FsmBool loadGlobalVariables = true;
+
+        public override void OnReset()
+        {
+            key = "key";
+        }
+
+        public override void Enter()
+        {
+            // Get FSMVariables objects required based on whether the user wants to save local variables, global variables or both.
+            var variableLists = new List<FsmVariables>();
+
+            if (loadFsmVariables.Value)
+                variableLists.Add(Fsm.Variables);
+            if (loadGlobalVariables.Value)
+                variableLists.Add(FsmVariables.GlobalVariables);
+
+            var dict = ES3.Load<Dictionary<string, object>>(key.Value);
+
+            foreach (var variableList in variableLists)
+                foreach (var fsmVariable in variableList.GetAllNamedVariables())
+                    if (dict.ContainsKey(fsmVariable.Name))
+                        fsmVariable.RawValue = dict[fsmVariable.Name];
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
 	[Tooltip("Loads an entire file as a string.")]
 	public class LoadRawString : SettingsAction
 	{
@@ -459,11 +532,8 @@ namespace ES3PlayMaker
 		{
 			exists.Value = ES3.KeyExists(key.Value, GetSettings());
 
-			if(exists.Value && existsEvent != null)
-				Fsm.Event(existsEvent);
-			else if(doesNotExistEvent != null)
-				Fsm.Event(doesNotExistEvent);
-		}
+            Fsm.Event(exists.Value ? existsEvent : doesNotExistEvent);
+        }
 	}
 
 	[ActionCategory("Easy Save 3")]
@@ -492,11 +562,8 @@ namespace ES3PlayMaker
 		{
 			exists.Value = ES3.FileExists(filePath.Value, GetSettings());
 
-			if(exists.Value && existsEvent != null)
-				Fsm.Event(existsEvent);
-			else if(doesNotExistEvent != null)
-				Fsm.Event(doesNotExistEvent);
-		}
+            Fsm.Event(exists.Value ? existsEvent : doesNotExistEvent);
+        }
 	}
 
 	[ActionCategory("Easy Save 3")]
@@ -525,11 +592,8 @@ namespace ES3PlayMaker
 		{
 			exists.Value = ES3.DirectoryExists(directoryPath.Value, GetSettings());
 
-			if(exists.Value && existsEvent != null)
-				Fsm.Event(existsEvent);
-			else if(doesNotExistEvent != null)
-				Fsm.Event(doesNotExistEvent);
-		}
+            Fsm.Event(exists.Value ? existsEvent : doesNotExistEvent);
+        }
 	}
 
 	#endregion
@@ -834,6 +898,32 @@ namespace ES3PlayMaker
 			es3Spreadsheet.SetCell<object>(col.Value, row.Value, value.GetValue());
 		}
 	}
+
+	[ActionCategory("Easy Save 3")]
+	[Tooltip("Gets a given cell of the ES3Spreadsheet and loads it into the value field.")]
+	public class ES3SpreadsheetGetCell : ES3SpreadsheetAction
+	{
+		[Tooltip("The column of the cell we want to set the value of.")]
+		public FsmInt col;
+		[Tooltip("The row of the cell we want to set the value of.")]
+		public FsmInt row;
+		
+		[Tooltip("The value we want to save.")]
+		[UIHint(UIHint.Variable)]
+		public FsmVar value;
+
+		public override void OnReset()
+		{
+			value = null;
+		}
+
+		public override void Enter()
+		{
+            var method = new ES3Reflection.ES3ReflectedMethod(typeof(ES3Spreadsheet), "GetCell", new System.Type[] { value.RealType }, new System.Type[] { typeof(int), typeof(int) });
+            var returnValue = method.Invoke(es3Spreadsheet, new object[] { col.Value, row.Value });
+            value.SetValue(returnValue);
+		}
+	}
 	
 	[ActionCategory("Easy Save 3")]
 	[Tooltip("Saves the ES3Spreadsheet to file.")]
@@ -866,6 +956,7 @@ namespace ES3PlayMaker
 		public override void OnReset()
 		{
 			filePath = "ES3.csv";
+
 		}
 
 		public override void Enter()
@@ -873,7 +964,6 @@ namespace ES3PlayMaker
 			es3Spreadsheet.Load(filePath.Value, GetSettings());
 		}
 	}
-	
 	#endregion
 
 	#region ES3File Actions
@@ -1137,6 +1227,14 @@ namespace ES3PlayMaker
 		[RequiredField]
 		public FsmString apiKey;
 
+		[Tooltip("The ES3File variable we're using.")]
+		[ObjectType(typeof(FsmES3File))]
+		[Title("ES3 File")]
+		[RequiredField]
+		public FsmObject fsmES3File;
+
+		public ES3File es3File { get{ return ((FsmES3File)fsmES3File.Value).file; } }
+
 		[Tooltip("An error code if an error occurred.")]
 		public FsmInt errorCode;
 
@@ -1147,6 +1245,7 @@ namespace ES3PlayMaker
 			url = "http://www.myserver.com/ES3Cloud.php";
 			errorCode = 0;
 			cloud = null;
+			fsmES3File = null;
 		}
 
 		public override void OnEnter()
@@ -1220,18 +1319,40 @@ namespace ES3PlayMaker
 		}
 	}
 
-	[ActionCategory("Easy Save 3")]
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Uploads a file in storage to the server, overwriting any existing files.")]
+    public class ES3CloudUploadES3File : ES3CloudUserAction
+    {
+        public override void Enter()
+        {
+            var settings = GetSettings();
+            StartCoroutine(cloud.UploadFile(es3File, user.Value, password.Value));
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
 	[Tooltip("Downloads a file from the server, overwriting any existing files, or returning error code 3 if no file exists on the server.")]
-	public class ES3CloudDownloadFile : ES3CloudUserAction
+	public class ES3CloudDownloadES3File : ES3CloudUserAction
 	{
 		public override void Enter()
 		{
 			var settings = GetSettings();
-			StartCoroutine(cloud.DownloadFile(path.Value, user.Value, password.Value, settings));
+			StartCoroutine(cloud.DownloadFile(es3File, user.Value, password.Value));
 		}
 	}
 
-	[ActionCategory("Easy Save 3")]
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Downloads a file from the server into an ES3File, or returning error code 3 if no file exists on the server.")]
+    public class ES3CloudDownloadFile : ES3CloudUserAction
+    {
+        public override void Enter()
+        {
+            var settings = GetSettings();
+            StartCoroutine(cloud.DownloadFile(path.Value, user.Value, password.Value, settings));
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
 	[Tooltip("Downloads a file from the server, overwriting any existing files, or returning error code 3 if no file exists on the server.")]
 	public class ES3CloudDeleteFile : ES3CloudUserAction
 	{
@@ -1264,14 +1385,18 @@ namespace ES3PlayMaker
 		[ArrayEditor(VariableType.String)]
 		public FsmArray filenames;
 
-		public override void OnReset()
+        [Tooltip("An optional search pattern containing '%' or '_' wildcards where '%' represents zero, one, or multiple characters, and '_' represents a single character. See https://www.w3schools.com/sql/sql_like.asp for more info.")]
+        public FsmString searchPattern;
+
+        public override void OnReset()
 		{
 			filenames = null;
+            searchPattern = "";
 		}
 
 		public override void Enter()
 		{
-			StartCoroutine(cloud.DownloadFilenames(user.Value, password.Value));
+			StartCoroutine(cloud.SearchFilenames(searchPattern.Value, user.Value, password.Value));
 		}
 
 		public override void OnUpdate()
@@ -1288,7 +1413,43 @@ namespace ES3PlayMaker
 		}
 	}
 
-	[ActionCategory("Easy Save 3")]
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Downloads the names of all of the files on the server for the given user.")]
+    public class ES3CloudSearchFilenames : ES3CloudUserAction
+    {
+        [Tooltip("The string array variable we want to load our file names into.")]
+        [ArrayEditor(VariableType.String)]
+        public FsmArray filenames;
+
+        [Tooltip("An optional search pattern containing '%' or '_' wildcards where '%' represents zero, one, or multiple characters, and '_' represents a single character. See https://www.w3schools.com/sql/sql_like.asp for more info.")]
+        public FsmString searchPattern;
+
+        public override void OnReset()
+        {
+            filenames = null;
+            searchPattern = "";
+        }
+
+        public override void Enter()
+        {
+            StartCoroutine(cloud.SearchFilenames(searchPattern.Value, user.Value, password.Value));
+        }
+
+        public override void OnUpdate()
+        {
+            if (cloud != null && cloud.isDone)
+            {
+                var downloadedFilenames = cloud.filenames;
+                filenames.Resize(cloud.filenames.Length);
+                for (int i = 0; i < downloadedFilenames.Length; i++)
+                    filenames.Set(i, downloadedFilenames[i]);
+                filenames.SaveChanges();
+            }
+            base.OnUpdate();
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
 	[Tooltip("Determines when a file was last updated.")]
 	public class ES3CloudDownloadTimestamp : ES3CloudUserAction
 	{
@@ -1315,6 +1476,70 @@ namespace ES3PlayMaker
 
 #endif
 	#endregion
+
+	#region ES3AutoSave actions
+
+	[ActionCategory("Easy Save 3")]
+	[Tooltip("Triggers Auto Save's Save method.")]
+	public class ES3AutoSaveSave : FsmStateAction
+	{
+		public override void OnEnter()
+		{
+			GameObject.Find("Easy Save 3 Manager").GetComponent<ES3AutoSaveMgr>().Save();
+		}
+	}
+
+	[ActionCategory("Easy Save 3")]
+	[Tooltip("Triggers Auto Save's Load method.")]
+	public class ES3AutoSaveLoad : FsmStateAction
+	{
+		public override void OnEnter()
+		{
+			GameObject.Find("Easy Save 3 Manager").GetComponent<ES3AutoSaveMgr>().Load();
+		}
+	}
+
+    #endregion
+
+    #region ES3Cache actions
+
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Caches a locally-stored file into memory.")]
+    public class CacheFile : SettingsAction
+    {
+        [Tooltip("The filename or file path of the file we want to cache.")]
+        public FsmString filePath;
+
+        public override void OnReset()
+        {
+            filePath = "SaveFile.es3";
+        }
+
+        public override void Enter()
+        {
+            ES3.CacheFile(filePath.Value, GetSettings());
+        }
+    }
+
+    [ActionCategory("Easy Save 3")]
+    [Tooltip("Stores a file in the cache to a local file.")]
+    public class StoreCachedFile : SettingsAction
+    {
+        [Tooltip("The filename or file path of the file we want to store.")]
+        public FsmString filePath;
+
+        public override void OnReset()
+        {
+            filePath = "SaveFile.es3";
+        }
+
+        public override void Enter()
+        {
+            ES3.StoreCachedFile(filePath.Value, GetSettings());
+        }
+    }
+
+    #endregion
 }
 
 

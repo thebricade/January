@@ -9,65 +9,111 @@ using UnityEngine.Networking;
 
 public static class ES3
 {
-	public enum Location 		{ File, PlayerPrefs, Memory, Resources };
+	public enum Location 		{ File, PlayerPrefs, InternalMS, Resources, Cache };
 	public enum Directory		{ PersistentDataPath, DataPath }
 	public enum EncryptionType 	{ None, AES };
-	public enum Format 			{ JSON };
+    public enum CompressionType { None, Gzip};
+    public enum Format 			{ JSON };
 	public enum ReferenceMode	{ ByRef, ByValue, ByRefAndValue};
 
 	public static string backupFileSuffix = ".bac";
 	public static string temporaryFileSuffix = ".tmp";
 
-	#region ES3.Save
+    #region ES3.Save
 
-	/// <summary>Saves the value to the default file with the given key.</summary>
-	/// <param name="key">The key we want to use to identify our value in the file.</param>
-	/// <param name="value">The value we want to save.</param>
-	public static void Save<T>(string key, object value)
+    /*// <summary>Saves the value to the default file with the given key.</summary>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    public static void Save(string key, object value)
+    {
+        Save<object>(key, value, new ES3Settings());
+    }
+
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
+    public static void Save(string key, object value, string filePath)
+    {
+        Save<object>(key, value, new ES3Settings(filePath));
+    }
+
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void Save(string key, object value, string filePath, ES3Settings settings)
+    {
+        Save<object>(key, value, new ES3Settings(filePath, settings));
+    }
+
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void Save(string key, object value, ES3Settings settings)
+    {
+        using (var writer = ES3Writer.Create(settings))
+        {
+            writer.Write<object>(key, value);
+            writer.Save();
+        }
+    }*/
+
+    /// <summary>Saves the value to the default file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to save.</param>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    public static void Save<T>(string key, T value)
 	{
-		using(var writer = ES3Writer.Create(new ES3Settings()))
-		{
-			writer.Write<T>(key, value);
-			writer.Save();
-		}
+        Save<T>(key, value, new ES3Settings());
 	}
 
-	/// <summary>Saves the value to a file with the given key.</summary>
-	/// <param name="key">The key we want to use to identify our value in the file.</param>
-	/// <param name="value">The value we want to save.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static void Save<T>(string key, object value, ES3Settings settings)
-	{
-		using(var writer = ES3Writer.Create(settings))
-		{
-			writer.Write<T>(key, value);
-			writer.Save();
-		}
-	}
-
-	/// <summary>Saves the value to a file with the given key.</summary>
-	/// <param name="key">The key we want to use to identify our value in the file.</param>
-	/// <param name="value">The value we want to save.</param>
-	/// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
-	public static void Save<T>(string key, object value, string filePath)
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to save.</param>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
+    public static void Save<T>(string key, T value, string filePath)
 	{
 		Save<T>(key, value, new ES3Settings(filePath));
 	}
 
-	/// <summary>Saves the value to a file with the given key.</summary>
-	/// <param name="key">The key we want to use to identify our value in the file.</param>
-	/// <param name="value">The value we want to save.</param>
-	/// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static void Save<T>(string key, object value, string filePath, ES3Settings settings)
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to save.</param>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="filepath">The relative or absolute path of the file we want to store our value to.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void Save<T>(string key, T value, string filePath, ES3Settings settings)
 	{
 		Save<T>(key, value, new ES3Settings(filePath, settings));
 	}
 
+    /// <summary>Saves the value to a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to save.</param>
+    /// <param name="key">The key we want to use to identify our value in the file.</param>
+    /// <param name="value">The value we want to save.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void Save<T>(string key, T value, ES3Settings settings)
+    {
+        if(settings.location == Location.Cache)
+        {
+            ES3File.GetOrCreateCachedFile(settings).Save(key, value);
+            return;
+        }
 
-	/// <summary>Creates or overwrites a file with the specified raw bytes.</summary>
-	/// <param name="bytes">The bytes we want to store.</param>
-	public static void SaveRaw(byte[] bytes)
+        using (var writer = ES3Writer.Create(settings))
+        {
+            writer.Write<T>(key, value);
+            writer.Save();
+        }
+    }
+
+    /// <summary>Creates or overwrites a file with the specified raw bytes.</summary>
+    /// <param name="bytes">The bytes we want to store.</param>
+    public static void SaveRaw(byte[] bytes)
 	{
 		SaveRaw(bytes, new ES3Settings());
 	}
@@ -94,7 +140,13 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static void SaveRaw(byte[] bytes, ES3Settings settings)
 	{
-		using (var stream = ES3Stream.CreateStream(settings, ES3FileMode.Write))
+        if (settings.location == Location.Cache)
+        {
+            ES3File.GetOrCreateCachedFile(settings).SaveRaw(bytes);
+            return;
+        }
+
+        using (var stream = ES3Stream.CreateStream(settings, ES3FileMode.Write))
 		{
 			stream.Write(bytes, 0, bytes.Length);
 		}
@@ -155,10 +207,17 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static void AppendRaw(byte[] bytes, ES3Settings settings)
 	{
-		ES3Settings newSettings = new ES3Settings(settings.path, settings);
-		newSettings.encryptionType = EncryptionType.None;
+        if (settings.location == Location.Cache)
+        {
+            ES3File.GetOrCreateCachedFile(settings).AppendRaw(bytes);
+            return;
+        }
 
-		using(var stream = ES3Stream.CreateStream(newSettings, ES3FileMode.Append))
+        ES3Settings newSettings = new ES3Settings(settings.path, settings);
+		newSettings.encryptionType = EncryptionType.None;
+        newSettings.compressionType = CompressionType.None;
+
+        using (var stream = ES3Stream.CreateStream(newSettings, ES3FileMode.Append))
 			stream.Write(bytes, 0, bytes.Length);
 	}
 
@@ -186,8 +245,15 @@ public static class ES3
 		var bytes = settings.encoding.GetBytes(str);
 		ES3Settings newSettings = new ES3Settings(settings.path, settings);
 		newSettings.encryptionType = EncryptionType.None;
+        newSettings.compressionType = CompressionType.None;
 
-		using(var stream = ES3Stream.CreateStream(newSettings, ES3FileMode.Append))
+        if (settings.location == Location.Cache)
+        {
+            ES3File.GetOrCreateCachedFile(settings).SaveRaw(bytes);
+            return;
+        }
+
+        using (var stream = ES3Stream.CreateStream(newSettings, ES3FileMode.Append))
 			stream.Write(bytes, 0, bytes.Length);
 	}
 
@@ -227,42 +293,81 @@ public static class ES3
 		ES3.SaveRaw(bytes, settings);
 	}
 
-	#endregion
+    #endregion
 
-	#region ES3.Load<T>
+    #region ES3.Load<T>
 
-	/* Standard load methods */
+    /* Standard load methods */
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	public static T Load<T>(string key)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    public static object Load(string key)
+    {
+        return Load<object>(key, new ES3Settings());
+    }
+
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    public static object Load(string key, string filePath)
+    {
+        return Load<object>(key, new ES3Settings(filePath));
+    }
+
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static object Load(string key, string filePath, ES3Settings settings)
+    {
+        return Load<object>(key, new ES3Settings(filePath, settings));
+    }
+
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static object Load(string key, ES3Settings settings)
+    {
+        return Load<object>(key, settings);
+    }
+
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    public static T Load<T>(string key)
 	{
 		return Load<T>(key, new ES3Settings());
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	public static T Load<T>(string key, string filePath)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    public static T Load<T>(string key, string filePath)
 	{
 		return Load<T>(key, new ES3Settings(filePath));
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static T Load<T>(string key, string filePath, ES3Settings settings)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static T Load<T>(string key, string filePath, ES3Settings settings)
 	{
 		return Load<T>(key, new ES3Settings(filePath, settings));
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static T Load<T>(string key, ES3Settings settings)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static T Load<T>(string key, ES3Settings settings)
 	{
-		using(var reader = ES3Reader.Create(settings))
+        if (settings.location == Location.Cache)
+            return ES3File.GetOrCreateCachedFile(settings).Load<T>(key);
+
+        using (var reader = ES3Reader.Create(settings))
 		{
 			if(reader == null)
 				throw new System.IO.FileNotFoundException("File \""+settings.FullPath + "\" could not be found.");
@@ -270,40 +375,47 @@ public static class ES3
 		}
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
-	public static T Load<T>(string key, T defaultValue)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
+    public static T Load<T>(string key, T defaultValue)
 	{
 		return Load<T>(key, defaultValue, new ES3Settings());
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	/// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
-	public static T Load<T>(string key, string filePath, T defaultValue)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
+    public static T Load<T>(string key, string filePath, T defaultValue)
 	{
 		return Load<T>(key, defaultValue, new ES3Settings(filePath));
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	/// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static T Load<T>(string key, string filePath, T defaultValue, ES3Settings settings)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static T Load<T>(string key, string filePath, T defaultValue, ES3Settings settings)
 	{
 		return Load<T>(key, defaultValue, new ES3Settings(filePath, settings));
 	}
 
-	/// <summary>Loads the value from a file with the given key.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static T Load<T>(string key, T defaultValue, ES3Settings settings)
+    /// <summary>Loads the value from a file with the given key.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static T Load<T>(string key, T defaultValue, ES3Settings settings)
 	{
-		using(var reader = ES3Reader.Create(settings))
+        if (settings.location == Location.Cache)
+            return ES3File.GetOrCreateCachedFile(settings).Load<T>(key, defaultValue);
+
+        using (var reader = ES3Reader.Create(settings))
 		{
 			if(reader == null)
 				return defaultValue;
@@ -311,42 +423,88 @@ public static class ES3
 		}
 	}
 
-	/* Self-assigning load methods */
+    /* Self-assigning load methods */
 
-	/// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="obj">The object we want to load the value into.</param>
-	public static void LoadInto<T>(string key, T obj) where T : class
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    public static void LoadInto<T>(string key, object obj)
+    {
+        LoadInto<object>(key, obj, new ES3Settings());
+    }
+
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    public static void LoadInto(string key, string filePath, object obj)
+    {
+        LoadInto<object>(key, obj, new ES3Settings(filePath));
+    }
+
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void LoadInto(string key, string filePath, object obj, ES3Settings settings)
+    {
+        LoadInto<object>(key, obj, new ES3Settings(filePath, settings));
+    }
+
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void LoadInto(string key, object obj, ES3Settings settings)
+    {
+        LoadInto<object>(key, obj, settings);
+    }
+
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    public static void LoadInto<T>(string key, T obj) where T : class
 	{
 		LoadInto<T>(key, obj, new ES3Settings());
 	}
 
-	/// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	/// <param name="obj">The object we want to load the value into.</param>
-	public static void LoadInto<T>(string key, string filePath, T obj) where T : class
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    public static void LoadInto<T>(string key, string filePath, T obj) where T : class
 	{
 		LoadInto<T>(key, obj, new ES3Settings(filePath));
 	}
 
-	/// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-	/// <param name="obj">The object we want to load the value into.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static void LoadInto<T>(string key, string filePath, T obj, ES3Settings settings)  where T : class
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void LoadInto<T>(string key, string filePath, T obj, ES3Settings settings)  where T : class
 	{
 		LoadInto<T>(key, obj, new ES3Settings(filePath, settings));
 	}
 
-	/// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
-	/// <param name="key">The key which identifies the value we want to load.</param>
-	/// <param name="obj">The object we want to load the value into.</param>
-	/// <param name="settings">The settings we want to use to override the default settings.</param>
-	public static void LoadInto<T>(string key, T obj, ES3Settings settings) where T : class
+    /// <summary>Loads the value from a file with the given key into an existing object, rather than creating a new instance.</summary>
+    /// <param name="T">The type of the data that we want to load.</param>
+    /// <param name="key">The key which identifies the value we want to load.</param>
+    /// <param name="obj">The object we want to load the value into.</param>
+    /// <param name="settings">The settings we want to use to override the default settings.</param>
+    public static void LoadInto<T>(string key, T obj, ES3Settings settings) where T : class
 	{
-		if(settings == null) settings = new ES3Settings();
+        if (settings.location == Location.Cache)
+        {
+            ES3File.GetOrCreateCachedFile(settings).LoadInto<T>(key, obj);
+            return;
+        }
+
+        if (settings == null) settings = new ES3Settings();
 		using(var reader = ES3Reader.Create(settings))
 		{
 			if(reader == null)
@@ -384,7 +542,10 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static byte[] LoadRawBytes(ES3Settings settings)
 	{
-		using (var stream = ES3Stream.CreateStream(settings, ES3FileMode.Read))
+        if (settings.location == Location.Cache)
+            return ES3File.GetOrCreateCachedFile(settings).LoadRawBytes();
+
+        using (var stream = ES3Stream.CreateStream(settings, ES3FileMode.Read))
 		{
 			var bytes = new byte[stream.Length];
 			stream.Read(bytes, 0, bytes.Length);
@@ -490,8 +651,11 @@ public static class ES3
 									#endif
 									ES3Settings settings)
 	{
+        if (settings.location != Location.File)
+            throw new InvalidOperationException("ES3.LoadAudio can only be used with the File save location");
+
 		if(Application.platform == RuntimePlatform.WebGLPlayer)
-			Debug.LogError("You cannot use ES3.LoadAudio with Unity Web Player");
+            throw new InvalidOperationException("You cannot use ES3.LoadAudio with WebGL");
 
 		string extension = ES3IO.GetExtension(audioFilePath).ToLower();
 
@@ -578,12 +742,14 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static void DeleteFile(ES3Settings settings)
 	{
-		if(settings.location == Location.File)
-			ES3IO.DeleteFile(settings.FullPath);
-		else if(settings.location == Location.PlayerPrefs)
-			PlayerPrefs.DeleteKey(settings.FullPath);
-		else if(settings.location == Location.Resources)
-			throw new System.NotSupportedException("Deleting files from Resources is not supported.");
+        if (settings.location == Location.File)
+            ES3IO.DeleteFile(settings.FullPath);
+        else if (settings.location == Location.PlayerPrefs)
+            PlayerPrefs.DeleteKey(settings.FullPath);
+        else if (settings.location == Location.Cache)
+            ES3File.RemoveCachedFile(settings);
+        else if (settings.location == Location.Resources)
+            throw new System.NotSupportedException("Deleting files from Resources is not supported.");
 	}
 
 	/// <summary>Copies a file from one path to another.</summary>
@@ -609,6 +775,9 @@ public static class ES3
 	/// <param name="newSettings">The settings we want to use when creating the new file.</param>
 	public static void CopyFile(ES3Settings oldSettings, ES3Settings newSettings)
 	{
+        if (oldSettings.location != newSettings.location)
+            throw new InvalidOperationException("Cannot copy file from "+oldSettings.location+" to "+newSettings.location+". Location must be the same for both source and destination.");
+
 		if(oldSettings.location == Location.File)
 		{
 			if(ES3IO.FileExists(oldSettings.FullPath))
@@ -621,6 +790,10 @@ public static class ES3
 		{
 			PlayerPrefs.SetString(newSettings.FullPath, PlayerPrefs.GetString(oldSettings.FullPath));
 		}
+        else if(oldSettings.location == Location.Cache)
+        {
+            ES3File.CopyCachedFile(oldSettings, newSettings);
+        }
 		else if(oldSettings.location == Location.Resources)
 			throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
 	}
@@ -648,7 +821,10 @@ public static class ES3
 	/// <param name="newSettings">The settings for the file we want our source file to be renamed to.</param>
 	public static void RenameFile(ES3Settings oldSettings, ES3Settings newSettings)
 	{
-		if(oldSettings.location == Location.File)
+        if (oldSettings.location != newSettings.location)
+            throw new InvalidOperationException("Cannot rename file in " + oldSettings.location + " to " + newSettings.location + ". Location must be the same for both source and destination.");
+
+        if (oldSettings.location == Location.File)
 		{
 			if(ES3IO.FileExists(oldSettings.FullPath))
 			{
@@ -661,7 +837,12 @@ public static class ES3
 			PlayerPrefs.SetString(newSettings.FullPath, PlayerPrefs.GetString(oldSettings.FullPath));
 			PlayerPrefs.DeleteKey(oldSettings.FullPath);
 		}
-		else if(oldSettings.location == Location.Resources)
+        else if (oldSettings.location == Location.Cache)
+        {
+            ES3File.CopyCachedFile(oldSettings, newSettings);
+            ES3File.RemoveCachedFile(oldSettings);
+        }
+        else if(oldSettings.location == Location.Resources)
 			throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
 	}
 	
@@ -737,8 +918,8 @@ public static class ES3
 				ES3IO.MoveDirectory(oldSettings.FullPath, newSettings.FullPath);
 			}
 		}
-		else if(oldSettings.location == Location.PlayerPrefs)
-			throw new System.NotSupportedException("Directories cannot be renamed when saving to PlayerPrefs or using WebGL.");
+		else if(oldSettings.location == Location.PlayerPrefs || oldSettings.location == Location.Cache)
+			throw new System.NotSupportedException("Directories cannot be renamed when saving to Cache, PlayerPrefs, tvOS or using WebGL.");
 		else if(oldSettings.location == Location.Resources)
 			throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
 	}
@@ -764,8 +945,8 @@ public static class ES3
 	{
 		if(settings.location == Location.File)
 			ES3IO.DeleteDirectory(settings.FullPath);
-		else if(settings.location == Location.PlayerPrefs)
-			throw new System.NotSupportedException("Deleting Directories using PlayerPrefs is not supported.");
+		else if(settings.location == Location.PlayerPrefs || settings.location == Location.Cache)
+			throw new System.NotSupportedException("Deleting Directories using Cache or PlayerPrefs is not supported.");
 		else if(settings.location == Location.Resources)
 			throw new System.NotSupportedException("Deleting directories from Resources is not allowed.");
 	}
@@ -796,10 +977,11 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static void DeleteKey(string key, ES3Settings settings)
 	{
-		if(settings.location == Location.Resources)
-			throw new System.NotSupportedException("Modifying files in Resources is not allowed.");
-
-		if(ES3.FileExists(settings))
+        if (settings.location == Location.Resources)
+            throw new System.NotSupportedException("Modifying files in Resources is not allowed.");
+        else if (settings.location == Location.Cache)
+            ES3File.DeleteKey(key, settings);
+        else if(ES3.FileExists(settings))
 		{	
 			using (var writer = ES3Writer.Create(settings))
 			{
@@ -842,6 +1024,9 @@ public static class ES3
 	/// <returns>True if the file exists, otherwise False.</returns>
 	public static bool KeyExists(string key, ES3Settings settings)
 	{
+        if (settings.location == Location.Cache)
+            return ES3File.KeyExists(key, settings);
+
 		using(var reader = ES3Reader.Create(settings))
 		{
 			if(reader == null)
@@ -880,12 +1065,14 @@ public static class ES3
 	/// <returns>True if the file exists, otherwise False.</returns>
 	public static bool FileExists(ES3Settings settings)
 	{
-		if(settings.location == Location.File)
-			return ES3IO.FileExists(settings.FullPath);
-		else if(settings.location == Location.PlayerPrefs)
-			return PlayerPrefs.HasKey(settings.FullPath);
-		else if(settings.location == Location.Resources)
-			return Resources.Load(settings.FullPath) != null;
+        if (settings.location == Location.File)
+            return ES3IO.FileExists(settings.FullPath);
+        else if (settings.location == Location.PlayerPrefs)
+            return PlayerPrefs.HasKey(settings.FullPath);
+        else if (settings.location == Location.Cache)
+            return ES3File.FileExists(settings);
+        else if (settings.location == Location.Resources)
+            return Resources.Load(settings.FullPath) != null;
 		return false;
 	}
 
@@ -914,8 +1101,8 @@ public static class ES3
 	{
 		if(settings.location == Location.File)
 			return ES3IO.DirectoryExists(settings.FullPath);
-		else if(settings.location == Location.PlayerPrefs)
-			throw new System.NotSupportedException("Directories are not supported for the PlayerPrefs location.");
+		else if(settings.location == Location.PlayerPrefs || settings.location == Location.Cache)
+			throw new System.NotSupportedException("Directories are not supported for the Cache and PlayerPrefs location.");
 		else if(settings.location == Location.Resources)
 			throw new System.NotSupportedException("Checking existence of folder in Resources not supported.");
 		return false;
@@ -946,6 +1133,10 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static string[] GetKeys(ES3Settings settings)
 	{
+
+        if (settings.location == Location.Cache)
+            return ES3File.GetKeys(settings);
+
 		var keys = new List<string>();
 		using(var reader = ES3Reader.Create(settings))
 		{
@@ -983,8 +1174,10 @@ public static class ES3
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static string[] GetFiles(ES3Settings settings)
 	{
-		if(settings.location != ES3.Location.File)
-			throw new System.NotSupportedException("ES3.GetFiles can only be used when the location is set to File.");
+        if (settings.location == Location.Cache)
+            return ES3File.GetFiles();
+        else if (settings.location != ES3.Location.File)
+            throw new System.NotSupportedException("ES3.GetFiles can only be used when the location is set to File or Cache.");
 		return ES3IO.GetFiles(settings.FullPath, false);
 	}
 
@@ -1107,18 +1300,80 @@ public static class ES3
 	/// <returns>A DateTime object represeting the UTC date and time the file was last updated.</returns>
 	public static DateTime GetTimestamp(ES3Settings settings)
 	{
-		if(settings.location == Location.File)
-			return ES3IO.GetTimestamp(settings.FullPath);
-		else if(settings.location == Location.PlayerPrefs)
-			return new DateTime(long.Parse(PlayerPrefs.GetString("timestamp_"+settings.FullPath, "0")), DateTimeKind.Utc);
-		else
+        if (settings.location == Location.File)
+            return ES3IO.GetTimestamp(settings.FullPath);
+        else if (settings.location == Location.PlayerPrefs)
+            return new DateTime(long.Parse(PlayerPrefs.GetString("timestamp_" + settings.FullPath, "0")), DateTimeKind.Utc);
+        else if (settings.location == Location.Cache)
+            return ES3File.GetTimestamp(settings);
+        else
 			return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 	}
 
-	/// <summary>Initialises Easy Save. This happens automatically when any ES3 methods are called, but is useful if you want to perform initialisation before calling an ES3 method.</summary>
-	public static void Init()
+    /// <summary>Stores the default cached file to persistent storage.</summary>
+	/// <remarks>A backup is created by copying the file and giving it a .bak extension. 
+	/// If a backup already exists it will be overwritten, so you will need to ensure that the old backup will not be required before calling this method.</remarks>
+	public static void StoreCachedFile()
+    {
+        ES3File.Store();
+    }
+
+    /// <summary>Stores a cached file to persistent storage.</summary>
+    /// <param name="filePath">The filename or path of the file we want to store the cached file to.</param>
+    public static void StoreCachedFile(string filePath)
+    {
+        StoreCachedFile(new ES3Settings(filePath));
+    }
+
+    /// <summary>Creates a backup of a file.</summary>
+    /// <param name="filePath">The filename or path of the file we want to store the cached file to.</param>
+    /// <param name="settings">The settings of the file we want to store to.</param>
+    public static void StoreCachedFile(string filePath, ES3Settings settings)
+    {
+        StoreCachedFile(new ES3Settings(filePath, settings));
+    }
+
+    /// <summary>Stores a cached file to persistent storage.</summary>
+    /// <param name="settings">The settings of the file we want to store to.</param>
+    public static void StoreCachedFile(ES3Settings settings)
+    {
+        ES3File.Store(settings);
+    }
+
+    /// <summary>Stores the default cached file to persistent storage.</summary>
+	/// <remarks>A backup is created by copying the file and giving it a .bak extension. 
+	/// If a backup already exists it will be overwritten, so you will need to ensure that the old backup will not be required before calling this method.</remarks>
+	public static void CacheFile()
+    {
+        CacheFile(new ES3Settings());
+    }
+
+    /// <summary>Stores a cached file to persistent storage.</summary>
+    /// <param name="filePath">The filename or path of the file we want to store the cached file to.</param>
+    public static void CacheFile(string filePath)
+    {
+        CacheFile(new ES3Settings(filePath));
+    }
+
+    /// <summary>Creates a backup of a file.</summary>
+    /// <param name="filePath">The filename or path of the file we want to store the cached file to.</param>
+    /// <param name="settings">The settings of the file we want to store to.</param>
+    public static void CacheFile(string filePath, ES3Settings settings)
+    {
+       CacheFile(new ES3Settings(filePath, settings));
+    }
+
+    /// <summary>Stores a cached file to persistent storage.</summary>
+    /// <param name="settings">The settings of the file we want to store to.</param>
+    public static void CacheFile(ES3Settings settings)
+    {
+        ES3File.CacheFile(settings);
+    }
+
+    /// <summary>Initialises Easy Save. This happens automatically when any ES3 methods are called, but is useful if you want to perform initialisation before calling an ES3 method.</summary>
+    public static void Init()
 	{
-		ES3Settings.LoadDefaults();
+		var settings = ES3Settings.defaultSettings;
 		ES3TypeMgr.Init();
 	}
 
