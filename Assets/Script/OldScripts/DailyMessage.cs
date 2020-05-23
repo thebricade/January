@@ -27,7 +27,7 @@ public class DailyMessage : MonoBehaviour
 
     public void QueueMessage() // queue everything for the set amount of days to play (5 for starting) 
     {
-        //conversations = SaveLoad.myData; 
+        conversations = SaveLoad.myData; 
         if (conversations == null) //if conversations doesn't exist we create a list of the messages with how many days the player can play '
         { 
             conversations = new List<DialogManager.Dialog>();
@@ -41,7 +41,7 @@ public class DailyMessage : MonoBehaviour
                 
             }
 
-            //SaveLoad.myData = conversations; 
+            SaveLoad.myData = conversations; 
             //myData.conversations = conversations; 
             Debug.Log("how many conversations loaded "+conversations.Count);
             ES3.Save<List<DialogManager.Dialog>>("conversations",conversations);
