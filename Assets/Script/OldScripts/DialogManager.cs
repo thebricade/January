@@ -24,7 +24,9 @@ public class DialogManager : MonoBehaviour
         {
             Message1,
             Message2,
-            Message3
+            Message3,
+            Message4,
+            Message5
         }
 
         public GameMood mood;
@@ -81,9 +83,8 @@ public class DialogManager : MonoBehaviour
 
     public virtual Dialog LoadMessage()
     {
-        Debug.Log("trying to load a message"); 
         Dialog nextMessage = messages.Next();
-        Debug.Log(nextMessage.mood.ToString()+nextMessage.chatLog.ToString());
+        Debug.Log("added "+nextMessage.mood.ToString()+nextMessage.chatLog.ToString() + " to conversation queue");
         return nextMessage; 
     }
 

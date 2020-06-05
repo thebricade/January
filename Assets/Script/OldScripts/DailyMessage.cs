@@ -8,7 +8,7 @@ public class DailyMessage : MonoBehaviour
 {
     protected List<DialogManager.Dialog> conversations;
     public Block startingConversation;
-
+    public string nextConversationDebug; 
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,11 @@ public class DailyMessage : MonoBehaviour
         if (conversations == null) //if conversations doesn't exist we create a list of the messages with how many days the player can play '
         { 
             conversations = new List<DialogManager.Dialog>();
-            Debug.Log("running queue message");
+            Debug.Log("creating order for messages");
             //SaveData conversation = new SaveData();
-            Debug.Log(ServiceLocator._messageTiming.lengthOfGame);
+            Debug.Log("the game is set for "+ ServiceLocator._messageTiming.lengthOfGame+"days");
             for (int i = 0; i < ServiceLocator._messageTiming.lengthOfGame; i++)
             {
-                Debug.Log(ServiceLocator._dialogManager.LoadMessage().ToString());
                 conversations.Add(ServiceLocator._dialogManager.LoadMessage());
                 
             }
@@ -51,7 +50,7 @@ public class DailyMessage : MonoBehaviour
         }
         else
         {
-            Debug.Log("didn't queue'");
+            Debug.Log("Did not make a new queue'");
         }
         
         Debug.Log("calling a conversation");
@@ -67,10 +66,11 @@ public class DailyMessage : MonoBehaviour
             Debug.Log("conversation called");
             string nextBlock = (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() + conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString());
             ServiceLocator._flowchart.ExecuteBlock(nextBlock);
-            conversations.RemoveAt(0);
         }
         else
         {
+           Debug.Log("it's not time for a new conversation'");
+           Debug.Log("the next conversation is " + (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() + conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString()));
             //change game state to where January isn't present on the page'
         } 
     }
@@ -78,14 +78,13 @@ public class DailyMessage : MonoBehaviour
     public void SetTime()
     {
         ServiceLocator._messageTiming.SetGoalTime();
+        conversations.RemoveAt(0);
+        Debug.Log("ran SetTime and removed last conversation next conversation is " + (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() + conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString()));
+        nextConversationDebug = (conversations[ServiceLocator._messageTiming.currentDay].mood.ToString() +
+                                 conversations[ServiceLocator._messageTiming.currentDay].chatLog.ToString());  
+        ES3.Save<List<DialogManager.Dialog>>("conversations",conversations);
     }
-
-    public void EndConversation() //call this at the end of a conversation to perform setup for the next conversation
-    {
-        //testing if you run QueueMessage() it should take you to a new conversation 
-        ServiceLocator._messageTiming.SetGoalTime();
-  
-    }
+    
 
     public void SaveConversation()
     {

@@ -9,19 +9,16 @@ public class MessageTiming : MonoBehaviour
     private bool goalTime; 
     
     //quick debug amount of Days for messages
-    public int lengthOfGame = 3;
+    public int lengthOfGame = 5;
     public int currentDay =0; 
     
     public void SetGoalTime()
     {
         timeStampNextMessage = SaveLoad.myDataTime;
-        goalTime = false; 
-        Debug.Log("ran set goal time");
+        goalTime = false;
         timeStampLastMessage = DateTime.Now;
-        Debug.Log("current time " +timeStampLastMessage);
         timeStampNextMessage = timeStampLastMessage.AddMinutes(3);
-        Debug.Log(("next message will appear at " + timeStampNextMessage));
-        
+
         //saving the Time for next message
         ES3.Save<DateTime>("nextMessage", timeStampNextMessage);
 
@@ -32,8 +29,6 @@ public class MessageTiming : MonoBehaviour
     public bool CheckTimeMet()
     {
         timeStampNextMessage = ES3.Load("nextMessage", timeStampNextMessage);
-        Debug.Log(timeStampLastMessage.ToString());
-        Debug.Log(timeStampNextMessage.ToString());
         if (DateTime.Now > timeStampNextMessage)
         {
             goalTime = true;
